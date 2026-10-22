@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light only">
+<meta name="robots" content="noindex,nofollow">
+<title>仙台・山形・藏王・銀山溫泉 7 天 6 夜 ｜ 2027.1.24–1.30</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Cormorant+Garamond:wght@600;700&display=swap"
+      media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Cormorant+Garamond:wght@600;700&display=swap"></noscript>
+<style>
+  :root{
+    color-scheme: light only;
+    /* 燈・雪・木 —— 大正浪漫的暖紙與瓦斯燈 */
+    --paper:#F7F3EC;
+    --card:#FFFDF9;
+    --card-2:#F2EDE4;
+    --ink:#211C17;
+    --ink-2:#5A5049;
+    --ink-3:#938779;
+    --line:#E3DBCE;
+    --line-soft:#EDE7DC;
+    --wash:#F0EADF;
+    /* 節點色（小面積） */
+    --lamp:#B2652C;   /* 瓦斯燈橙 */
+    --night:#2B4356;  /* 藏青夜 */
+    --frost:#4F7A87;  /* 樹冰青 */
+    --pine:#4A6B4F;   /* 杉綠 */
+    --wine:#7C3F4E;   /* 酒紅 */
+    --stone:#7E756B;  /* 石灰 */
+    --gold:#94742F;
+    --r:14px;
+    --maxw:1000px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --ease-soft:cubic-bezier(.4,0,.2,1);
+    --serif:"Noto Serif TC","Songti TC","Hiragino Mincho ProN","Yu Mincho",Georgia,"PingFang TC",serif;
+    --disp:"Cormorant Garamond",var(--serif);
+    --sans:"PingFang TC","Hiragino Sans","Noto Sans TC","Microsoft JhengHei",system-ui,-apple-system,sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    background:var(--paper);color:var(--ink);
+    font-family:var(--sans);font-size:15px;line-height:1.78;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    overflow-x:hidden;
+  }
+  button{font-family:inherit;color:inherit;-webkit-tap-highlight-color:transparent}
+  .m-kick,.mf .c,.mf .t,.eyebrow,.label,.rail-s,.c-tag,.c-when,.fl .c,.fl .t,.dno,.tl-t,
+  .l-chk,.l-area,.step-t,.tbl .lbl,.tbl .num,.dc-no,.dc-date,.sheet-no,.sheet-date{font-variant-numeric:tabular-nums}
+  b{font-weight:700}
+  .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 28px}
+  .star{color:var(--gold);font-weight:700}
+
+  /* ========== 報頭 ========== */
+  .mast{
+    background:
+      radial-gradient(130% 90% at 12% 4%, rgba(178,101,44,.30) 0, transparent 55%),
+      radial-gradient(110% 80% at 92% 100%, rgba(79,122,135,.28) 0, transparent 52%),
+      linear-gradient(162deg,#14212C 0%,#1E3243 58%,#243B4C 100%);
+    color:#fff;position:relative;overflow:hidden;
+    padding:calc(40px + env(safe-area-inset-top,0px)) 0 34px;
+  }
+  /* 瓦斯燈：一排細直線光暈，靜態不閃 */
+  .mast::before{
+    content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background:repeating-linear-gradient(90deg,
+      rgba(230,183,122,.13) 0 1px, transparent 1px 74px);
+    -webkit-mask-image:linear-gradient(180deg,rgba(0,0,0,.9),transparent 78%);
+    mask-image:linear-gradient(180deg,rgba(0,0,0,.9),transparent 78%);
+  }
+  .mast>*{position:relative;z-index:1}
+  .m-kick{font-size:10.5px;letter-spacing:.34em;text-transform:uppercase;color:#D9B98D;font-weight:600}
+  .m-title{font-family:var(--serif);font-size:42px;font-weight:900;letter-spacing:.14em;line-height:1.18;margin:16px 0 4px}
+  .m-title small{display:block;font-family:var(--disp);font-size:20px;font-weight:600;letter-spacing:.22em;color:#C9B18C;margin-top:8px}
+  .m-sub{font-size:13px;color:#B7C6D2;letter-spacing:.06em;margin-top:12px}
+  .m-rule{height:1px;background:linear-gradient(90deg,rgba(230,183,122,.55),rgba(255,255,255,.04));margin:24px 0 18px}
+  .m-flights{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  .mf{border:1px solid rgba(255,255,255,.14);background:rgba(255,255,255,.05);border-radius:12px;padding:14px 16px;
+      border-left:3px solid rgba(226,184,119,.75)}
+  .mf .c{font-size:10px;letter-spacing:.12em;color:#E2B877;font-weight:700}
+  .mf .r{font-family:var(--serif);font-size:15px;font-weight:700;margin:6px 0 3px;letter-spacing:.04em}
+  .mf .t{font-size:12px;color:#A5B7C4;letter-spacing:.03em}
+
+  /* ========== 導覽：滑動藥丸 ========== */
+  .nav{
+    position:sticky;top:0;z-index:30;
+    background:rgba(247,243,236,.9);
+    -webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-in{position:relative;display:flex;gap:4px;max-width:var(--maxw);margin:0 auto;
+    padding:9px 28px;overflow-x:auto;scrollbar-width:none}
+  .nav-in::-webkit-scrollbar{display:none}
+  .nav-i{
+    position:relative;z-index:1;flex:0 0 auto;border:0;background:none;cursor:pointer;
+    font-size:14px;font-weight:700;letter-spacing:.09em;color:var(--ink-3);
+    padding:8px 16px;white-space:nowrap;border-radius:999px;
+    transition:color .3s var(--ease-soft);
+  }
+  .nav-i.on{color:#FFF8EC}
+  @media (hover:hover) and (pointer:fine){.nav-i:not(.on):hover{color:var(--ink-2)}}
+  .nav-ind{
+    position:absolute;top:9px;left:0;height:38px;width:0;border-radius:999px;
+    background:linear-gradient(140deg,#2B4356,#3C5C70);
+    box-shadow:0 4px 14px rgba(43,67,86,.26);
+    transition:transform .42s var(--ease), width .42s var(--ease);
+  }
+
+  /* ========== 視圖切換 ========== */
+  .main{padding-block:36px 78px;overflow-anchor:none}
+  .view{display:none;opacity:1;transform:none;transition:opacity .3s var(--ease-soft), transform .3s var(--ease-soft)}
+  .view.on{display:block}
+  .view.pre{opacity:0;transform:translateY(10px)}
+  .view.out{opacity:0;transform:translateY(-5px)}
+  @keyframes bootIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+  .boot{animation:bootIn .55s var(--ease) both}
+
+  /* ========== 標題區 ========== */
+  .v-head{margin-bottom:30px}
+  .eyebrow{font-family:var(--disp);font-size:13px;letter-spacing:.34em;text-transform:uppercase;color:var(--lamp);font-weight:700}
+  .v-title{font-family:var(--serif);font-size:32px;font-weight:900;letter-spacing:.07em;margin:10px 0 0;line-height:1.3}
+  .v-title::after{content:"";display:block;width:44px;height:2px;background:var(--lamp);margin-top:14px;border-radius:2px}
+  .lede{font-size:14.5px;color:var(--ink-2);margin-top:16px;max-width:64ch}
+  .hint{font-size:12.5px;color:var(--ink-3);margin-top:11px}
+  .sec-h{font-family:var(--serif);font-size:19px;font-weight:900;letter-spacing:.06em;margin:40px 0 16px;
+    padding-left:13px;border-left:3px solid var(--lamp)}
+  .sec-h:first-child{margin-top:0}
+  .label{font-family:var(--disp);font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-3);font-weight:700;margin:38px 0 14px}
+
+  /* ========== 直式路線軌 ========== */
+  .rail{position:relative;margin:26px 0 30px;padding-left:22px}
+  .rail::before{content:"";position:absolute;left:5px;top:8px;bottom:8px;width:2px;
+    background:linear-gradient(180deg,var(--line),var(--line) 92%,transparent)}
+  .rail-i{position:relative;display:flex;flex-wrap:wrap;align-items:baseline;gap:10px;padding:7px 0}
+  .rail-i::before{content:"";position:absolute;left:-22px;top:14px;width:12px;height:12px;border-radius:50%;
+    background:var(--paper);border:2px solid var(--a)}
+  .rail-n{font-family:var(--serif);font-size:15px;font-weight:700;letter-spacing:.04em}
+  .rail-s{font-size:11.5px;color:var(--ink-3);letter-spacing:.06em}
+  .rail-x{font-size:12.5px;color:var(--ink-2)}
+
+  /* ========== 條件標籤 ========== */
+  .facts{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px}
+  .facts span{font-size:12.5px;color:var(--ink-2);border:1px solid var(--line);border-radius:6px;padding:5px 12px;background:var(--card)}
+
+  /* ========== 卡片：左側燈條 ========== */
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(236px,1fr));gap:14px}
+  .card{
+    position:relative;display:flex;flex-direction:column;align-items:flex-start;text-align:left;width:100%;font:inherit;cursor:pointer;
+    background:var(--card);border:1px solid var(--line);border-left:3px solid var(--a);border-radius:var(--r);
+    padding:18px 20px;overflow:hidden;
+    transition:border-color .28s var(--ease-soft), box-shadow .3s var(--ease-soft), transform .3s var(--ease);
+  }
+  @media (hover:hover) and (pointer:fine){
+    .card:hover{border-color:#D3C9B8;border-left-color:var(--a);box-shadow:0 10px 26px rgba(49,38,26,.09);transform:translateY(-2px)}
+    .card:hover .go{opacity:1}
+  }
+  .card:active{border-color:#CDC2B0}
+  .c-tag{display:inline-flex;align-items:center;gap:7px;font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--a)}
+  .c-tag::before{content:"";width:14px;height:2px;border-radius:2px;background:var(--a)}
+  .card h3{font-family:var(--serif);font-size:18px;font-weight:900;letter-spacing:.04em;margin:11px 0 4px}
+  .c-when{font-size:11px;color:var(--ink-3);letter-spacing:.05em}
+  .c-body{font-size:12.5px;color:var(--ink-2);line-height:1.7;margin:12px 0}
+  .c-foot{font-size:11.5px;font-weight:700;color:var(--a);margin-top:auto;padding-top:11px;border-top:1px solid var(--line-soft);width:100%}
+  .go{font-size:11px;font-weight:700;color:var(--ink-3);margin-top:8px;opacity:0;transition:opacity .26s var(--ease-soft)}
+
+  /* ========== 航班 ========== */
+  .flights{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:16px}
+  .fl{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:17px 19px;border-left:3px solid var(--night)}
+  .fl .c{font-size:10.5px;letter-spacing:.1em;color:var(--night);font-weight:800}
+  .fl .r{font-family:var(--serif);font-size:18px;font-weight:900;margin:8px 0 4px;letter-spacing:.05em}
+  .fl .t{font-size:12.5px;color:var(--ink-3);letter-spacing:.03em}
+
+  /* ========== 提示框 ========== */
+  .box{background:var(--wash);border-radius:var(--r);padding:16px 19px;font-size:13px;line-height:1.8;color:#463C33;margin-top:18px}
+  .box b{color:#2B241D}
+  .box.plain{background:var(--card);border:1px solid var(--line);color:var(--ink-2)}
+  .box.plain b{color:var(--ink)}
+
+  /* ========== 待辦 ========== */
+  .notes{display:grid;grid-template-columns:repeat(auto-fill,minmax(248px,1fr));gap:13px}
+  .note{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px}
+  .note h4{font-family:var(--serif);font-size:14.5px;font-weight:900;letter-spacing:.03em;display:flex;align-items:center;gap:9px;margin-bottom:7px}
+  .note h4::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lamp);flex:0 0 auto}
+  .note p{font-size:12.5px;color:var(--ink-2);line-height:1.7}
+
+  /* ========== 每日行程 ========== */
+  .daystore{display:none}
+  .dlist{display:grid;grid-template-columns:repeat(auto-fit,minmax(296px,1fr));gap:14px}
+  .dcard{
+    display:flex;flex-direction:column;align-items:flex-start;text-align:left;width:100%;font:inherit;cursor:pointer;
+    background:var(--card);border:1px solid var(--line);border-left:3px solid var(--a);border-radius:var(--r);padding:18px 20px;
+    transition:border-color .28s var(--ease-soft), box-shadow .3s var(--ease-soft), transform .3s var(--ease);
+  }
+  @media (hover:hover) and (pointer:fine){
+    .dcard:hover{border-color:#D3C9B8;box-shadow:0 10px 26px rgba(49,38,26,.09);transform:translateY(-2px)}
+    .dcard:hover .dc-go{color:var(--a)}
+  }
+  .dcard:active{border-color:#CDC2B0}
+  .dc-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .dc-no{font-family:var(--disp);font-size:13px;font-weight:700;letter-spacing:.2em;color:var(--a);border:1px solid var(--a);padding:2px 9px;border-radius:4px}
+  .dc-date{font-size:12px;font-weight:600;color:var(--ink-3);letter-spacing:.03em}
+  .dc-title{font-family:var(--serif);font-size:17px;font-weight:900;letter-spacing:.04em;margin:12px 0 7px;line-height:1.55}
+  .dc-line{font-size:12.5px;color:var(--ink-2);line-height:1.7}
+  .dc-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;
+    margin-top:auto;padding-top:12px;border-top:1px solid var(--line-soft);font-size:11.5px;color:var(--ink-3)}
+  .dc-go{font-weight:800;color:var(--ink-3);white-space:nowrap;transition:color .26s var(--ease-soft)}
+
+  .day{padding-bottom:36px}
+
+  /* 滿版單日 */
+  .sheet{position:fixed;inset:0;z-index:100;display:flex;flex-direction:column;background:var(--paper);
+    opacity:0;transform:translateY(14px);
+    transition:opacity .26s var(--ease-soft), transform .3s var(--ease)}
+  .sheet.open{opacity:1;transform:none}
+  .sheet[hidden]{display:none}
+  body.locked{overflow:hidden}
+  .sheet-bar{flex:0 0 auto;display:flex;align-items:center;gap:12px;
+    padding:calc(11px + env(safe-area-inset-top,0px)) 18px 11px;
+    background:rgba(247,243,236,.95);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
+    border-bottom:1px solid var(--line)}
+  .sheet-x{display:flex;align-items:center;justify-content:center;flex:0 0 auto;width:38px;height:38px;
+    border:1px solid var(--line);background:var(--card);border-radius:50%;cursor:pointer;
+    transition:background .24s var(--ease-soft), border-color .24s var(--ease-soft)}
+  .sheet-x svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:2.2;stroke-linecap:round}
+  @media (hover:hover) and (pointer:fine){.sheet-x:hover{background:var(--wash);border-color:#D3C9B8}}
+  .sheet-id{display:flex;align-items:center;gap:9px;min-width:0}
+  .sheet-no{font-family:var(--disp);font-size:13px;font-weight:700;letter-spacing:.2em;color:#FFF8EC;background:var(--a);padding:3px 10px;border-radius:4px;white-space:nowrap}
+  .sheet-date{font-size:12.5px;font-weight:600;color:var(--ink-2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .sheet-nav{margin-left:auto;display:flex;gap:7px;flex:0 0 auto}
+  .sheet-nav button{width:38px;height:38px;border:1px solid var(--line);background:var(--card);border-radius:11px;
+    font-size:17px;font-weight:700;color:var(--ink-2);cursor:pointer;line-height:1;
+    transition:background .24s var(--ease-soft), color .24s var(--ease-soft), opacity .24s var(--ease-soft)}
+  .sheet-nav button:disabled{opacity:.32;cursor:default}
+  @media (hover:hover) and (pointer:fine){.sheet-nav button:not(:disabled):hover{background:var(--wash);color:var(--ink)}}
+  .sheet-body{flex:1 1 auto;overflow-y:auto;-webkit-overflow-scrolling:touch;
+    padding:26px 20px calc(46px + env(safe-area-inset-bottom,0px));
+    opacity:1;transition:opacity .16s var(--ease-soft)}
+  .sheet-body.fade{opacity:0}
+  .sheet-in{max-width:740px;margin:0 auto}
+  .sheet .day{padding-bottom:0}
+  .sheet .dhead{display:none}
+  .sheet .dtitle{margin-top:0;font-size:25px}
+  @media (max-width:760px){.sheet-body{padding:20px 18px calc(40px + env(safe-area-inset-bottom,0px))}.sheet .dtitle{font-size:21px}}
+
+  .dhead{display:flex;flex-wrap:wrap;align-items:center;gap:11px}
+  .dno{font-family:var(--disp);font-size:13px;font-weight:700;letter-spacing:.2em;color:#FFF8EC;background:var(--a);padding:3px 10px;border-radius:4px}
+  .ddate{font-size:12.5px;font-weight:600;color:var(--ink-3);letter-spacing:.04em}
+  .dtitle{font-family:var(--serif);font-size:23px;font-weight:900;letter-spacing:.05em;margin:14px 0 0;line-height:1.45}
+  .dmove{font-size:13px;color:var(--ink-2);line-height:1.75;margin-top:13px;background:var(--card-2);border-radius:10px;padding:12px 15px}
+
+  /* 時間軸：時間在左軌上的籤 */
+  .tl{list-style:none;position:relative;margin-top:24px;padding-left:4px}
+  .tl::before{content:"";position:absolute;left:5px;top:16px;bottom:16px;width:2px;background:var(--line)}
+  .tl li{position:relative;padding:0 0 22px 24px}
+  .tl li::before{content:"";position:absolute;left:0;top:9px;width:12px;height:12px;border-radius:50%;
+    background:var(--paper);border:2px solid var(--a)}
+  .tl li:last-child{padding-bottom:0}
+  .tl-t{display:inline-block;font-size:11.5px;font-weight:800;color:var(--a);letter-spacing:.06em;
+    background:var(--card);border:1px solid var(--line);border-radius:5px;padding:1px 8px;margin-bottom:6px}
+  .tl-b{font-size:14.5px;line-height:1.8}
+  .k{display:inline-block;font-size:11px;font-weight:700;padding:1.5px 8px;border-radius:4px;margin-right:8px;vertical-align:2px;letter-spacing:.04em}
+  .k-move{background:rgba(43,67,86,.11);color:#25384A}
+  .k-eat{background:rgba(178,101,44,.13);color:#8E4F21}
+  .k-see{background:rgba(74,107,79,.13);color:#3C5A41}
+  .k-ski{background:rgba(79,122,135,.15);color:#3D6570}
+  .k-spa{background:rgba(124,63,78,.12);color:#6A3442}
+  .k-stay{background:rgba(126,117,107,.15);color:#635B52}
+  .dfoot{margin-top:22px;padding-top:14px;border-top:1px solid var(--line-soft);font-size:12.5px;color:var(--ink-2)}
+  .dfoot b{color:var(--a)}
+
+  /* ========== 住宿 ========== */
+  .lodges{display:grid;gap:14px}
+  .lodge{background:var(--card);border:1px solid var(--line);border-left:3px solid var(--a);border-radius:var(--r);padding:20px 22px}
+  .l-top{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-bottom:11px}
+  .l-chk{font-size:10px;font-weight:800;letter-spacing:.1em;color:#FFF8EC;background:var(--a);padding:3px 10px;border-radius:999px}
+  .l-when{font-size:12.5px;font-weight:600;color:var(--ink-2)}
+  .l-area{font-family:var(--disp);font-size:13px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--a)}
+  .l-name{font-family:var(--serif);font-size:18px;font-weight:900;letter-spacing:.04em;margin:7px 0 9px}
+  .l-desc{font-size:13.5px;color:var(--ink-2);line-height:1.8}
+  .l-pick{font-size:12px;font-weight:700;color:var(--gold);margin-top:12px}
+
+  /* ========== 步驟 ========== */
+  .steps{display:grid;gap:12px}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:15px 18px}
+  .step-t{font-size:11.5px;font-weight:800;letter-spacing:.09em;color:var(--a)}
+  .step-d{font-size:13.5px;line-height:1.85;margin-top:6px}
+  .step-n{font-size:12px;color:var(--ink-3);line-height:1.75;margin-top:8px}
+
+  /* ========== 地圖按鈕 ========== */
+  .gmap{
+    display:inline-flex;align-items:center;gap:4px;margin:2px 2px 2px 0;padding:3px 10px;
+    border-radius:6px;background:rgba(43,67,86,.08);color:#25384A;
+    font-size:13px;font-weight:700;text-decoration:none;line-height:1.5;
+    -webkit-tap-highlight-color:transparent;
+    transition:background .24s var(--ease-soft), color .24s var(--ease-soft);
+  }
+  @media (hover:hover) and (pointer:fine){.gmap:hover{background:rgba(43,67,86,.15);color:#1A2A38}}
+
+  /* ========== 表格 ========== */
+  .scroll-x{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tbl{width:100%;min-width:560px;border-collapse:collapse;font-size:13.5px;background:var(--card);border:1px solid var(--line);border-radius:var(--r)}
+  .tbl th{text-align:left;font-size:10.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-3);padding:12px 16px;background:var(--card-2);border-bottom:1px solid var(--line)}
+  .tbl th:last-child{text-align:right}
+  .tbl td{padding:13px 16px;border-top:1px solid var(--line-soft);vertical-align:top}
+  .tbl tbody tr:first-child td{border-top:none}
+  .tbl .lbl{font-size:11.5px;color:var(--ink-3);white-space:nowrap}
+  .tbl .seg{font-weight:700}
+  .tbl .num{text-align:right;white-space:nowrap;font-weight:700}
+  .tbl tfoot td{background:var(--card-2);font-weight:800;border-top:1px solid var(--line)}
+
+  /* ========== 頁尾 ========== */
+  .foot{border-top:1px solid var(--line);margin-top:10px;padding:26px 0 calc(34px + env(safe-area-inset-bottom,0px));font-size:11.5px;color:var(--ink-3);letter-spacing:.05em}
+
+  /* ========== 手機 ========== */
+  @media (max-width:760px){
+    .wrap{padding:0 18px}
+    .mast{padding-top:calc(28px + env(safe-area-inset-top,0px));padding-bottom:26px}
+    .m-title{font-size:32px;letter-spacing:.12em}
+    .m-title small{font-size:17px}
+    .m-rule{margin:18px 0 14px}
+    .m-flights{grid-template-columns:1fr}
+    .nav-in{padding:8px 18px}
+    .nav-i{font-size:13.5px;padding:7px 13px}
+    .nav-ind{top:8px;height:35px}
+    .main{padding-block:28px 58px}
+    .v-title{font-size:26px}
+    .flights{grid-template-columns:1fr}
+    .dtitle{font-size:20.5px}
+    .tl-b{font-size:14px}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{animation-duration:.001ms !important;transition-duration:.001ms !important}
+  }
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="wrap">
+    <div class="m-kick">Snow &amp; Onsen · Sendai · Yamagata · Zao · Ginzan</div>
+    <h1 class="m-title">仙台・山形・藏王・銀山溫泉<small>2027 · 01.24 → 01.30</small></h1>
+    <div class="m-sub">7 天 6 夜 ｜ 滑雪 1 天 · 樹冰 1 天 · 溫泉街 1 夜 ｜ 全程不租車</div>
+    <div class="m-rule"></div>
+    <div class="m-flights">
+      <div class="mf"><div class="c">BR118 · 去程 1/24（日）</div><div class="r">桃園 TPE → 仙台 SDJ</div><div class="t">10:15 → 14:25 ｜ 約 3 小時 10 分</div></div>
+      <div class="mf"><div class="c">BR117 · 回程 1/30（六）</div><div class="r">仙台 SDJ → 桃園 TPE</div><div class="t">16:15 → 19:30 ｜ 約 4 小時 15 分</div></div>
+    </div>
+  </div>
+</header>
+
+<nav class="nav">
+  <div class="nav-in" id="navin" role="tablist">
+    <button class="nav-i on" role="tab" aria-selected="true">總覽</button>
+    <button class="nav-i" role="tab" aria-selected="false">逐日行程</button>
+    <button class="nav-i" role="tab" aria-selected="false">住宿</button>
+    <button class="nav-i" role="tab" aria-selected="false">滑雪・樹冰</button>
+    <button class="nav-i" role="tab" aria-selected="false">交通</button>
+    <span class="nav-ind" id="navind"></span>
+  </div>
+</nav>
+
+<main class="main wrap boot" id="main">
+
+  <!-- ===== 01 總覽 ===== -->
+  <section class="view on">
+    <div class="v-head">
+      <div class="eyebrow">Overview · Draft</div>
+      <h2 class="v-title">行程總覽</h2>
+      <p class="lede">仙台進出，重心在山形。山形站當作前後兩次的轉運基地，中間兩晚住藏王溫泉滑雪＋看樹冰，1/28 用旅館接駁進銀山溫泉住一晚，最後一晚回仙台吃牛舌、採買，隔天下午的班機回台。機票與六晚住宿、銀山來回接駁都已確認（去程接駁預約登記 13:40、官網寫 13:30；旅館沒回信，13:20 前到大石田站等，並備好自行前往的備案），剩下列車班次與雪票裝備。</p>
+      <p class="hint">點下方任一張卡片，會直接展開那天的滿版行程</p>
+    </div>
+
+    <div class="rail">
+      <div class="rail-i" style="--a:var(--night)"><span class="rail-n">山形</span><span class="rail-s">Day 1 · 1/24</span><span class="rail-x">SUPER HOTEL 山形站西口</span></div>
+      <div class="rail-i" style="--a:var(--frost)"><span class="rail-n">藏王溫泉</span><span class="rail-s">Day 2–3 · 1/25–1/27</span><span class="rail-x">おおみや旅館 · 連泊 2 晚</span></div>
+      <div class="rail-i" style="--a:var(--night)"><span class="rail-n">山形</span><span class="rail-s">Day 4 · 1/27</span><span class="rail-x">SUPER HOTEL 山形站西口</span></div>
+      <div class="rail-i" style="--a:var(--lamp)"><span class="rail-n">銀山溫泉</span><span class="rail-s">Day 5 · 1/28</span><span class="rail-x">御宿 やなだ屋 · 素泊附接駁</span></div>
+      <div class="rail-i" style="--a:var(--wine)"><span class="rail-n">仙台</span><span class="rail-s">Day 6 · 1/29</span><span class="rail-x">仙台站前多美迎</span></div>
+      <div class="rail-i" style="--a:var(--stone)"><span class="rail-n">返程</span><span class="rail-s">Day 7 · 1/30</span><span class="rail-x">仙台機場 16:15 起飛</span></div>
+    </div>
+
+    <div class="facts">
+      <span>仙台 進 · 仙台 出</span>
+      <span>滑雪 1 天 · 藏王溫泉雪場</span>
+      <span>樹冰 1 天 · 藏王 Ropeway</span>
+      <span>銀山溫泉 1 夜</span>
+      <span>JR ・ 巴士 ・ 旅館接駁 ・ 步行</span>
+      <span>不租車</span>
+      <span>機票 TWD 30,083</span>
+    </div>
+
+    <div class="cards">
+      <button class="card" style="--a:var(--night)" data-day="0">
+        <span class="c-tag">Day 1</span>
+        <h3>抵達仙台 · 直奔山形</h3>
+        <div class="c-when">1 晚 · 1/24（日）</div>
+        <div class="c-body">14:25 落地仙台，搭機場線進仙台站，再轉高速巴士約 70 分到山形。入住站西口的 SUPER HOTEL，泡天然溫泉、早點休息。</div>
+        <div class="c-foot">✅ SUPER HOTEL 山形站西口天然溫泉</div>
+        <div class="go">看 Day 1 行程 →</div>
+      </button>
+      <button class="card" style="--a:var(--pine)" data-day="1">
+        <span class="c-tag">Day 2</span>
+        <h3>山寺雪景 · 上藏王</h3>
+        <div class="c-when">1/25（一）</div>
+        <div class="c-body">早上仙山線 20 分到山寺，雪中爬立石寺；中午回山形拿行李，下午搭巴士上藏王溫泉，入住おおみや旅館。</div>
+        <div class="c-foot">✅ 藏王おおみや旅館（1/25–1/27）</div>
+        <div class="go">看 Day 2 行程 →</div>
+      </button>
+      <button class="card" style="--a:var(--frost)" data-day="2">
+        <span class="c-tag">Day 3</span>
+        <h3>藏王滑雪 · 單板一整天</h3>
+        <div class="c-when">1/26（二）· 連泊不搬家</div>
+        <div class="c-body">全天在藏王溫泉滑雪場。旅館就在雪場旁，晚上回去泡強酸性硫磺泉；有體力可加碼樹冰夜間點燈。</div>
+        <div class="c-foot">✅ 藏王おおみや旅館</div>
+        <div class="go">看 Day 3 行程 →</div>
+      </button>
+      <button class="card" style="--a:var(--frost)" data-day="3">
+        <span class="c-tag">Day 4</span>
+        <h3>樹冰 · 回山形</h3>
+        <div class="c-when">1 晚 · 1/27（三）</div>
+        <div class="c-body">一早搭藏王 Ropeway 上地藏山頂看樹冰，1 月下旬正是樹冰最完整的時候。下午下山搭巴士回山形過一晚。</div>
+        <div class="c-foot">✅ SUPER HOTEL 山形站西口天然溫泉</div>
+        <div class="go">看 Day 4 行程 →</div>
+      </button>
+      <button class="card" style="--a:var(--lamp)" data-day="4">
+        <span class="c-tag">Day 5</span>
+        <h3>銀山溫泉 · 瓦斯燈夜景</h3>
+        <div class="c-when">1 晚 · 1/28（四）</div>
+        <div class="c-body">山形搭つばさ到大石田，搭御宿 やなだ屋 13:30／13:40 的接駁進銀山（旅館沒回信，提早到站等）。傍晚瓦斯燈亮起，溫泉街只有住客走得動的那種安靜。素泊不含餐，晚餐要在山形站先買好。</div>
+        <div class="c-foot">✅ 御宿 やなだ屋 · 接駁 13:30／13:40 · 備案已備</div>
+        <div class="go">看 Day 5 行程 →</div>
+      </button>
+      <button class="card" style="--a:var(--wine)" data-day="5">
+        <span class="c-tag">Day 6</span>
+        <h3>回仙台 · 牛舌與採買</h3>
+        <div class="c-when">1 晚 · 1/29（五）</div>
+        <div class="c-body">10:10 接駁回大石田，經山形回仙台。下午一番町逛街、買伴手禮，晚上吃牛舌，住站前多美迎泡大浴場。</div>
+        <div class="c-foot">✅ 仙台站前多美迎飯店</div>
+        <div class="go">看 Day 6 行程 →</div>
+      </button>
+      <button class="card" style="--a:var(--stone)" data-day="6">
+        <span class="c-tag">Day 7</span>
+        <h3>返程</h3>
+        <div class="c-when">1/30（六）</div>
+        <div class="c-body">上午仙台自由活動、最後採買，下午搭機場線 25 分到仙台機場，BR117 16:15 起飛。</div>
+        <div class="c-foot">✈ 19:30 抵桃園</div>
+        <div class="go">看 Day 7 行程 →</div>
+      </button>
+    </div>
+
+    <div class="label">航班</div>
+    <div class="flights" style="margin-top:0">
+      <div class="fl"><div class="c">BR118 · 去程 1/24（日）· 經濟艙 Standard（H）</div><div class="r">桃園 → 仙台</div><div class="t">10:15 起飛 · 14:25 抵達 ｜ 約 3 小時 10 分</div></div>
+      <div class="fl"><div class="c">BR117 · 回程 1/30（六）· 經濟艙 Standard（M）</div><div class="r">仙台 → 桃園</div><div class="t">16:15 起飛 · 19:30 抵達 ｜ 約 4 小時 15 分</div></div>
+    </div>
+    <div class="box plain"><b>長榮直飛仙台，來回票價 TWD 30,083。</b>去程 14:25 落地，入境領完行李抓 15:10 左右出關，當天要再移動到山形，所以 Day 1 不排景點。回程 16:15 起飛，仙台站到機場只要 25 分鐘，上午還能在仙台走走，抓 13:30 前離開市區即可。</div>
+
+    <div class="label">待辦</div>
+    <div class="notes">
+      <div class="note"><h4>山形新幹線指定席</h4><p>つばさ 自 2024 年起<b>全車指定席</b>。Day 5 山形 → 大石田、Day 6 大石田 → 山形 兩段要先用えきねっと劃位，尤其 Day 5 要壓在中午接駁前到站，建議訂約 12:16 抵大石田的那班。</p></div>
+      <div class="note"><h4>藏王往返巴士時刻</h4><p>山形站前 ⇄ 藏王溫泉的山交巴士約每小時 1 班，Day 2 下午上山、Day 4 下午下山都要先查好當日班次，冬天有可能誤點。</p></div>
+      <div class="note"><h4>雪票與裝備租借</h4><p>單板整組（板／靴／安全帽）先線上預約 1 天；纜車票買 1 日券。確認旅館有沒有住客優惠票與雪具寄放。</p></div>
+      <div class="note"><h4>樹冰與纜車運行</h4><p>藏王 Ropeway 遇強風會停駛。Day 4 早上先看官網運行狀況，備案是改玩藏王溫泉街或提早回山形。</p></div>
+      <div class="note"><h4>銀山接駁：旅館沒回信</h4><p>預約登記 1/28 大石田駅 13:40、1/29 銀山溫泉 10:10，官網則寫大石田駅發車 13:30。寫信問過旅館沒有回覆，所以照原訂自行前往：<b>13:20 前在大石田站出口等，等到 13:50 沒看到接駁車</b>就打旅館電話，聯絡不上就改搭はながさバス或計程車（見交通頁）。</p></div>
+      <div class="note"><h4>銀山這晚沒有供餐、沒有溫泉</h4><p>やなだ屋訂的方案<b>不含餐也不含溫泉</b>，泡湯要去溫泉街的共同浴場。正在問旅館能不能加餐。問到之前先當作不能加：溫泉街沒有便利商店、餐廳冬天傍晚就收，Day 5 中午在山形站把晚餐和隔天早餐一起買好。</p></div>
+      <div class="note"><h4>餐廳</h4><p>Day 2 山形蕎麥或冷肉蕎麥，Day 6 仙台牛舌（利久／喜助／太助，晚餐建議先訂位），其餘在雪場與旅館內解決。SUPER HOTEL 兩晚與おおみや含早餐，Dormy Inn 不含早；おおみや是否含晚餐待確認。</p></div>
+      <div class="note"><h4>保險 · 裝備</h4><p>確認旅平險含滑雪。自備護目鏡、手套、防摔褲、厚襪、暖暖包；銀山溫泉街雪地濕滑，帶防滑鞋底或冰爪。</p></div>
+      <div class="note"><h4>現金</h4><p>藏王共同浴場、銀山溫泉部分小店與接駁沿線只收現金，先在仙台或山形車站領好日幣。</p></div>
+    </div>
+  </section>
+
+  <!-- ===== 02 逐日行程 ===== -->
+  <section class="view">
+    <div class="v-head" style="margin-bottom:20px">
+      <div class="eyebrow">Itinerary · Draft</div>
+      <h2 class="v-title">逐日行程</h2>
+    </div>
+
+    <div class="dlist">
+      <button class="dcard" data-open="0" style="--a:var(--night)">
+        <span class="dc-top"><span class="dc-no">Day 1</span><span class="dc-date">1/24（日）· 抵達</span></span>
+        <span class="dc-title">仙台落地 · 高速巴士進山形</span>
+        <span class="dc-line">BR118 → 機場線 → 仙台站 → 高速巴士 → 山形站西口</span>
+        <span class="dc-foot"><span>宿 · SUPER HOTEL 山形站西口</span><span class="dc-go">展開全天 →</span></span>
+      </button>
+      <button class="dcard" data-open="1" style="--a:var(--pine)">
+        <span class="dc-top"><span class="dc-no">Day 2</span><span class="dc-date">1/25（一）· 上山</span></span>
+        <span class="dc-title">山寺立石寺 · 下午進藏王溫泉</span>
+        <span class="dc-line">仙山線 → 山寺 → 回山形拿行李 → 山交巴士 → 藏王溫泉</span>
+        <span class="dc-foot"><span>宿 · 藏王おおみや旅館</span><span class="dc-go">展開全天 →</span></span>
+      </button>
+      <button class="dcard" data-open="2" style="--a:var(--frost)">
+        <span class="dc-top"><span class="dc-no">Day 3</span><span class="dc-date">1/26（二）· 藏王連泊</span></span>
+        <span class="dc-title">藏王溫泉滑雪場 · 單板整天</span>
+        <span class="dc-line">全天雪場，不用搬家；晚上泡湯，可選樹冰夜間點燈</span>
+        <span class="dc-foot"><span>宿 · 藏王おおみや旅館</span><span class="dc-go">展開全天 →</span></span>
+      </button>
+      <button class="dcard" data-open="3" style="--a:var(--frost)">
+        <span class="dc-top"><span class="dc-no">Day 4</span><span class="dc-date">1/27（三）· 回山形</span></span>
+        <span class="dc-title">藏王 Ropeway 樹冰 · 下午下山</span>
+        <span class="dc-line">退房寄行李 → 山麓線 → 樹氷高原 → 地藏山頂 → 取行李 → 巴士回山形</span>
+        <span class="dc-foot"><span>宿 · SUPER HOTEL 山形站西口</span><span class="dc-go">展開全天 →</span></span>
+      </button>
+      <button class="dcard" data-open="4" style="--a:var(--lamp)">
+        <span class="dc-top"><span class="dc-no">Day 5</span><span class="dc-date">1/28（四）· 銀山溫泉</span></span>
+        <span class="dc-title">大石田轉接駁 · 瓦斯燈溫泉街</span>
+        <span class="dc-line">つばさ → 大石田 → 13:30／13:40 旅館接駁 → 銀山溫泉散步・夜景</span>
+        <span class="dc-foot"><span>宿 · 御宿 やなだ屋</span><span class="dc-go">展開全天 →</span></span>
+      </button>
+      <button class="dcard" data-open="5" style="--a:var(--wine)">
+        <span class="dc-top"><span class="dc-no">Day 6</span><span class="dc-date">1/29（五）· 回仙台</span></span>
+        <span class="dc-title">10:10 接駁下山 · 仙台牛舌與採買</span>
+        <span class="dc-line">銀山 → 大石田 → 山形 → 仙台 → 一番町・牛舌</span>
+        <span class="dc-foot"><span>宿 · 仙台站前多美迎</span><span class="dc-go">展開全天 →</span></span>
+      </button>
+      <button class="dcard" data-open="6" style="--a:var(--stone)">
+        <span class="dc-top"><span class="dc-no">Day 7</span><span class="dc-date">1/30（六）· 返程</span></span>
+        <span class="dc-title">最後採買 · 仙台機場返台</span>
+        <span class="dc-line">上午自由活動 → 機場線 25 分 → BR117 16:15 起飛</span>
+        <span class="dc-foot"><span>19:30 抵桃園</span><span class="dc-go">展開全天 →</span></span>
+      </button>
+    </div>
+
+    <div class="daystore" id="daystore">
+
+    <article class="day" style="--a:var(--night)">
+      <div class="dhead"><span class="dno">Day 1</span><span class="ddate">1/24（日）· 抵達</span></div>
+      <h3 class="dtitle">仙台落地 · 高速巴士進山形</h3>
+      <p class="dmove">✈ BR118 10:15 → 14:25 抵仙台 → 🚆 仙台機場 Access 線約 25 分到仙台站 → 🚌 高速巴士（仙台 ⇄ 山形線）約 70 分 → 山形站前 ｜ 合計約 2.5 小時</p>
+      <ul class="tl">
+        <li><div class="tl-t">10:15</div><div class="tl-b"><span class="k k-move">起飛</span>桃園機場 BR118，建議 08:00 前到機場報到</div></li>
+        <li><div class="tl-t">14:25</div><div class="tl-b"><span class="k k-move">入境</span>仙台機場落地、入境、領行李；先買 Suica／確認手機網路，抓 15:10 左右出關</div></li>
+        <li><div class="tl-t">~15:30</div><div class="tl-b"><span class="k k-move">機場線</span><b>仙台機場 → 仙台站</b> 快速 17 分／普通 25 分，約 ¥660，直接刷 Suica</div></li>
+        <li><div class="tl-t">~16:30</div><div class="tl-b"><span class="k k-move">高速巴士</span><b>仙台站前 → 山形站前</b> 山交／JR 巴士約 70 分、約 ¥1,100，尖峰時段 20–30 分一班，不用預約</div></li>
+        <li><div class="tl-t">~17:45</div><div class="tl-b"><span class="k k-stay">入住</span><span class="star">★</span> <b>SUPER HOTEL 山形站西口天然溫泉</b>（Check-in 15:00 起），車站西口步行約 1–2 分</div></li>
+        <li><div class="tl-t">晚</div><div class="tl-b"><span class="k k-eat">晚餐</span>山形站周邊：站內「山形まるごと館 紅の蔵」、霞城セントラル或站前商店街；也可先吃山形蕎麥暖身</div></li>
+        <li><div class="tl-t">夜</div><div class="tl-b"><span class="k k-spa">泡湯</span>飯店的天然溫泉大浴場，洗掉飛行疲勞；順便在超商補水，早睡（明天飯店含早餐）</div></li>
+      </ul>
+      <div class="dfoot">宿：<b>SUPER HOTEL 山形站西口天然溫泉</b> ✅</div>
+    </article>
+
+    <article class="day" style="--a:var(--pine)">
+      <div class="dhead"><span class="dno">Day 2</span><span class="ddate">1/25（一）· 上山</span></div>
+      <h3 class="dtitle">山寺立石寺 · 下午進藏王溫泉</h3>
+      <p class="dmove">🚆 山形 → 山寺（仙山線約 20 分）→ 回山形取行李 → 🚌 山形站前 → 藏王溫泉（山交巴士約 40 分）</p>
+      <ul class="tl">
+        <li><div class="tl-t">~08:00</div><div class="tl-b"><span class="k k-move">退房</span>飯店早餐（含）後<b>退房</b>（期限 10:00），行李寄放櫃台，回來再取</div></li>
+        <li><div class="tl-t">~08:40</div><div class="tl-b"><span class="k k-move">仙山線</span><b>山形 → 山寺</b> 約 20 分、¥240。班次約 1 小時 1–2 班，先查好去回時刻</div></li>
+        <li><div class="tl-t">09:10</div><div class="tl-b"><span class="k k-see">山寺</span><span class="star">★</span> <b>寶珠山 立石寺</b>：登山口到奧之院 1,015 階，冬天覆雪、階梯濕滑，慢走單程約 40–50 分。入山 ¥300</div></li>
+        <li><div class="tl-t">10:30</div><div class="tl-b"><span class="k k-see">五大堂</span>雪景俯瞰山寺谷地的招牌角度；下山前在門前町吃力こんにゃく、買玉こんにゃく</div></li>
+        <li><div class="tl-t">12:00</div><div class="tl-b"><span class="k k-eat">午餐</span>山寺站前蕎麥店，或回山形站吃「冷肉蕎麥（冷たい肉そば）」</div></li>
+        <li><div class="tl-t">~13:30</div><div class="tl-b"><span class="k k-move">回山形</span>仙山線回山形站，回飯店取行李</div></li>
+        <li><div class="tl-t">~14:40</div><div class="tl-b"><span class="k k-move">山交巴士</span><b>山形站前 1 號乘車處 → 藏王溫泉巴士總站</b> 約 40 分、約 ¥1,000，冬天約每小時 1 班</div></li>
+        <li><div class="tl-t">~15:40</div><div class="tl-b"><span class="k k-stay">入住</span><span class="star">★</span> <b>藏王おおみや旅館</b>（Check-in 14:00 起），巴士總站步行可到（雪地拖行李較慢，可先問旅館接送）</div></li>
+        <li><div class="tl-t">傍晚</div><div class="tl-b"><span class="k k-spa">泡湯</span>藏王是強酸性硫磺泉。旅館內湯之外，溫泉街還有上湯・下湯・川原湯三處共同浴場（各 ¥200 現金）</div></li>
+        <li><div class="tl-t">晚</div><div class="tl-b"><span class="k k-eat">晚餐</span>旅館會席（若含晚餐）；順便跟旅館確認明天雪場動線與雪具寄放</div></li>
+      </ul>
+      <div class="dfoot">宿：<b>藏王おおみや旅館</b>（1/25–1/27 連泊 2 晚）✅</div>
+    </article>
+
+    <article class="day" style="--a:var(--frost)">
+      <div class="dhead"><span class="dno">Day 3</span><span class="ddate">1/26（二）· 藏王連泊</span></div>
+      <h3 class="dtitle">藏王溫泉滑雪場 · 單板整天</h3>
+      <p class="dmove">🏂 旅館 ⇄ 雪場步行／接駁，全天無移動壓力</p>
+      <ul class="tl">
+        <li><div class="tl-t">~07:30</div><div class="tl-b"><span class="k k-eat">早餐</span>旅館早餐（含），吃飽再出門</div></li>
+        <li><div class="tl-t">08:30</div><div class="tl-b"><span class="k k-ski">租裝備</span>到租借店取預約好的單板組（板／靴／安全帽），買 1 日纜車券（約 ¥6,500–7,000，屆時以官網為準）</div></li>
+        <li><div class="tl-t">09:30</div><div class="tl-b"><span class="k k-ski">上午場</span>先在 <b>上の台</b>／<b>中央</b> 區的寬緩雪道熱身；藏王雪道共 15 條、纜車 30 餘部，路線複雜，先拿一份雪道圖</div></li>
+        <li><div class="tl-t">12:00</div><div class="tl-b"><span class="k k-eat">午餐</span>雪場內餐廳（上の台、樹氷高原站周邊都有）</div></li>
+        <li><div class="tl-t">13:00</div><div class="tl-b"><span class="k k-ski">下午場</span>續滑到 15:30–16:00；天氣好可滑到樹氷高原一帶，順便先看隔天樹冰的狀況</div></li>
+        <li><div class="tl-t">~16:30</div><div class="tl-b"><span class="k k-spa">泡湯</span>回旅館泡湯休息。<span class="star">★</span> 想加碼可看 <b>樹冰夜間點燈</b>（1–2 月特定日，晚間纜車或雪上車，需另外預約、看官網公告）</div></li>
+        <li><div class="tl-t">晚</div><div class="tl-b"><span class="k k-eat">晚餐</span>旅館晚餐（若含晚餐）；整理行李與隔天樹冰要穿的防風層——<b>明早上山前就要退房</b></div></li>
+      </ul>
+      <div class="dfoot">宿：<b>藏王おおみや旅館</b> ✅</div>
+    </article>
+
+    <article class="day" style="--a:var(--frost)">
+      <div class="dhead"><span class="dno">Day 4</span><span class="ddate">1/27（三）· 回山形</span></div>
+      <h3 class="dtitle">藏王 Ropeway 樹冰 · 下午下山</h3>
+      <p class="dmove">🚠 藏王山麓站 → 樹氷高原站（山麓線）→ 地藏山頂站（山頂線）→ 旅館取行李 → 🚌 藏王溫泉 → 山形站前 約 40 分</p>
+      <ul class="tl">
+        <li><div class="tl-t">早</div><div class="tl-b"><span class="k k-move">確認</span>出門前先看 <b>藏王 Ropeway 官網運行狀況</b>：強風、視線不良會停駛山頂線</div></li>
+        <li><div class="tl-t">~08:00</div><div class="tl-b"><span class="k k-move">退房</span><b>おおみや旅館退房期限 10:00</b>，看完樹冰回來一定超過，所以吃完旅館早餐（含）、上山前先退房，行李寄放櫃台</div></li>
+        <li><div class="tl-t">08:30</div><div class="tl-b"><span class="k k-see">上山</span><span class="star">★</span> <b>藏王 Ropeway</b> 山麓站搭乘，往復約 ¥3,500–4,000（票價屆時確認）。一早人少、光線好</div></li>
+        <li><div class="tl-t">09:15</div><div class="tl-b"><span class="k k-see">樹冰</span><b>地藏山頂站</b>：1 月下旬是樹冰最完整的時期，山頂 −10℃ 上下、風大，要戴好帽子手套面罩；地藏尊、展望台走一圈</div></li>
+        <li><div class="tl-t">11:00</div><div class="tl-b"><span class="k k-move">下山</span>回樹氷高原站，可在此稍作停留再回山麓站</div></li>
+        <li><div class="tl-t">12:00</div><div class="tl-b"><span class="k k-eat">午餐</span>藏王溫泉街（ジンギスカン成吉思汗烤羊、蕎麥麵）；有時間可再泡一次共同浴場或足湯</div></li>
+        <li><div class="tl-t">~14:00</div><div class="tl-b"><span class="k k-move">取行李</span>回おおみや旅館取早上寄放的行李，到藏王溫泉巴士總站</div></li>
+        <li><div class="tl-t">~14:40</div><div class="tl-b"><span class="k k-move">山交巴士</span><b>藏王溫泉 → 山形站前</b> 約 40 分、約 ¥1,000（班次先查好）</div></li>
+        <li><div class="tl-t">~15:30</div><div class="tl-b"><span class="k k-stay">入住</span><b>SUPER HOTEL 山形站西口天然溫泉</b>（Check-in 15:00 起）；順便在山形站買隔天路上的東西</div></li>
+        <li><div class="tl-t">晚</div><div class="tl-b"><span class="k k-eat">晚餐</span>山形市區（牛肉蕎麥、米澤牛丼、居酒屋）；早點休息，明天要趕中午的接駁</div></li>
+      </ul>
+      <div class="dfoot">宿：<b>SUPER HOTEL 山形站西口天然溫泉</b> ✅</div>
+    </article>
+
+    <article class="day" style="--a:var(--lamp)">
+      <div class="dhead"><span class="dno">Day 5</span><span class="ddate">1/28（四）· 銀山溫泉</span></div>
+      <h3 class="dtitle">大石田轉接駁 · 瓦斯燈溫泉街</h3>
+      <p class="dmove">🚄 山形 → 大石田（山形新幹線 つばさ 約 35 分／在來線約 60 分）→ 🚐 13:30／13:40 御宿 やなだ屋接駁（13:20 前到站等）→ 銀山溫泉 約 40 分</p>
+      <ul class="tl">
+        <li><div class="tl-t">上午</div><div class="tl-b"><span class="k k-see">山形</span>SUPER HOTEL 早餐（含）後退房（期限 10:00）、行李寄櫃台，自由活動：山形市鄉土館（文翔館）、霞城公園雪景</div></li>
+        <li><div class="tl-t">~10:50</div><div class="tl-b"><span class="k k-eat">採買</span><span class="star">★</span> <b>一次買齊：午餐便當＋今晚晚餐＋明天早餐</b>。やなだ屋是<b>素泊（不含餐）</b>，溫泉街沒有便利商店，在山形站內／站前買好（便當、熟食、飲料）</div></li>
+        <li><div class="tl-t">~11:45</div><div class="tl-b"><span class="k k-move">つばさ</span><span class="star">★</span> <b>山形 → 大石田</b>，約 12:16 抵達（依 2026 年 7 月時刻資料為つばさ 131 號，訂票時以えきねっと為準）。<b>全車指定席，務必先劃位</b>。下一班約 13:16 才到，接駁若是 13:30 只剩 14 分鐘，冬天誤點就趕不上，所以搭早一班</div></li>
+        <li><div class="tl-t">~12:16</div><div class="tl-b"><span class="k k-eat">午餐</span>大石田站候車室吃剛買的便當，邊吃邊等接駁；在站裡比在外面雪地等安全</div></li>
+        <li><div class="tl-t">13:30／13:40</div><div class="tl-b"><span class="k k-move">旅館接駁</span><span class="star">★</span> <b>大石田駅 → 銀山溫泉</b>（御宿 やなだ屋接駁；預約登記 13:40，官網寫 13:30，旅館沒回信）。13:20 前在車站出口等；<b>等到 13:50 沒來</b>：先打旅館電話（0237-28-2030），聯絡不上就改搭 14:10 はながさバス（現行時刻，冬季時刻表出發前再查）或計程車</div></li>
+        <li><div class="tl-t">~14:30</div><div class="tl-b"><span class="k k-stay">入住</span><b>御宿 やなだ屋 別館</b>（川側 6 疊）。別館是新開幕的，入住前確認櫃台在本館還是別館；溫泉街車輛管制，行李盡量精簡</div></li>
+        <li><div class="tl-t">15:00</div><div class="tl-b"><span class="k k-spa">泡湯</span>方案<b>不含溫泉</b>，下午先去溫泉街的共同浴場「しろがね湯」泡（營業時間與公休日出發前查，傍晚前就會關）</div></li>
+        <li><div class="tl-t">15:45</div><div class="tl-b"><span class="k k-see">散步</span>大正浪漫木造旅館街、銀山川兩岸、<b>白銀之瀧</b>（步行約 10 分，冬天結冰很美）、免費的和樂足湯</div></li>
+        <li><div class="tl-t">~16:50</div><div class="tl-b"><span class="k k-see">點燈</span><span class="star">★</span> <b>瓦斯燈點燈</b>：日落後（1 月下旬約 17:00 前後）整條街亮起，雪＋燈＋木造建築的招牌畫面。日歸客走後更安靜</div></li>
+        <li><div class="tl-t">晚</div><div class="tl-b"><span class="k k-eat">晚餐</span>素泊不含餐：吃中午在山形站買好的。想在溫泉街外食要先查好營業時間或預約，冬天多半傍晚就收</div></li>
+        <li><div class="tl-t">夜</div><div class="tl-b"><span class="k k-see">夜景</span>晚上再走一次燈下的溫泉街（雪地很滑，鞋底防滑很重要）；方案不含溫泉，房間沖澡就好</div></li>
+      </ul>
+      <div class="dfoot">宿：<b>御宿 やなだ屋</b> ✅　接駁去程 1/28 13:30／13:40（13:20 前到站等）</div>
+    </article>
+
+    <article class="day" style="--a:var(--wine)">
+      <div class="dhead"><span class="dno">Day 6</span><span class="ddate">1/29（五）· 回仙台</span></div>
+      <h3 class="dtitle">10:10 接駁下山 · 仙台牛舌與採買</h3>
+      <p class="dmove">🚐 10:10 銀山溫泉 → 大石田駅 → 🚄 つばさ 大石田 → 山形 約 35 分 → 🚌 高速巴士／🚆 仙山線 山形 → 仙台 約 70–80 分</p>
+      <ul class="tl">
+        <li><div class="tl-t">早</div><div class="tl-b"><span class="k k-see">晨景</span>早起再走一次溫泉街，清晨無人的雪街值得；早餐吃前一天買好的，退房期限 11:00，搭 10:10 接駁前退房即可</div></li>
+        <li><div class="tl-t">10:10</div><div class="tl-b"><span class="k k-move">旅館接駁</span><span class="star">★</span> <b>銀山溫泉 → 大石田駅</b>（御宿 やなだ屋接駁，已登記），約 40 分</div></li>
+        <li><div class="tl-t">~11:20</div><div class="tl-b"><span class="k k-move">つばさ</span><b>大石田 → 山形</b> 約 35 分，<b>指定席先劃位</b></div></li>
+        <li><div class="tl-t">~12:20</div><div class="tl-b"><span class="k k-move">往仙台</span><b>山形 → 仙台</b>：高速巴士約 70 分 ¥1,100（班次密、可直接到仙台站前），或 JR 仙山線快速約 80 分 ¥1,170</div></li>
+        <li><div class="tl-t">~13:40</div><div class="tl-b"><span class="k k-stay">寄行李</span><b>仙台站前多美迎飯店</b> 寄行李（Check-in 15:00 起）</div></li>
+        <li><div class="tl-t">14:00</div><div class="tl-b"><span class="k k-eat">午餐</span><span class="star">★</span> <b>牛舌</b>：仙台站 3 樓「牛たん通り」（利久・喜助）最方便；本店派可去 太助、伊達の牛たん本舗</div></li>
+        <li><div class="tl-t">15:30</div><div class="tl-b"><span class="k k-see">逛街</span>一番町・クリスロード拱廊商店街、仙台 PARCO、三越、Loft；伴手禮：萩の月、笹かまぼこ（阿部蒲鉾店）、毛豆泥點心（ずんだ茶寮）</div></li>
+        <li><div class="tl-t">晚</div><div class="tl-b"><span class="k k-eat">晚餐</span>牛舌（中午沒吃到就晚上吃，熱門店建議訂位）或國分町居酒屋；回站前補齊伴手禮，順便買明天早餐（Dormy Inn 不含早）</div></li>
+        <li><div class="tl-t">夜</div><div class="tl-b"><span class="k k-spa">泡湯</span>多美迎大浴場，順便打包行李、秤重</div></li>
+      </ul>
+      <div class="dfoot">宿：<b>仙台站前多美迎飯店</b> ✅　接駁回程 1/29 10:10 ✅</div>
+    </article>
+
+    <article class="day" style="--a:var(--stone)">
+      <div class="dhead"><span class="dno">Day 7</span><span class="ddate">1/30（六）· 返程</span></div>
+      <h3 class="dtitle">最後採買 · 仙台機場返台</h3>
+      <p class="dmove">🚆 仙台站 → 仙台機場 Access 線約 25 分 ｜ ✈ BR117 16:15 → 桃園 19:30</p>
+      <ul class="tl">
+        <li><div class="tl-t">~09:00</div><div class="tl-b"><span class="k k-eat">早餐</span>Dormy Inn 不含早餐：吃前一晚買的，或站內咖啡店、仙台朝市；退房期限 11:00，退房後行李寄放櫃台</div></li>
+        <li><div class="tl-t">10:00</div><div class="tl-b"><span class="k k-see">自由活動</span>近的選項：仙台朝市、榴岡公園、大崎八幡宮；想走遠一點可搭 るーぷる仙台觀光巴士上瑞鳳殿或仙台城跡（來回抓 3 小時）</div></li>
+        <li><div class="tl-t">12:00</div><div class="tl-b"><span class="k k-eat">午餐</span>仙台站周邊，最後一餐牛舌或海鮮丼</div></li>
+        <li><div class="tl-t">~13:00</div><div class="tl-b"><span class="k k-move">取行李</span>回飯店取行李，站內做最後採買</div></li>
+        <li><div class="tl-t">~13:40</div><div class="tl-b"><span class="k k-move">機場線</span><b>仙台站 → 仙台機場</b> 約 25 分、¥660，抓 14:10 前後抵達，離起飛還有 2 小時</div></li>
+        <li><div class="tl-t">16:15</div><div class="tl-b"><span class="k k-move">起飛</span>BR117 仙台 → 桃園，19:30 抵達</div></li>
+      </ul>
+      <div class="dfoot">今日返台，行程完成 ✈</div>
+    </article>
+    </div>
+  </section>
+
+  <!-- ===== 03 住宿 ===== -->
+  <section class="view">
+    <div class="v-head">
+      <div class="eyebrow">Lodging</div>
+      <h2 class="v-title">住宿</h2>
+      <p class="lede">六晚全數訂妥。山形站西口的 SUPER HOTEL 住兩次，當作進出藏王與銀山的轉運基地；中間兩晚住藏王溫泉滑雪＋看樹冰，銀山與仙台各一晚。</p>
+    </div>
+    <div class="lodges">
+      <div class="lodge" style="--a:var(--night)">
+        <div class="l-top"><span class="l-chk">✅ 已訂</span><span class="l-when">山形 · 1 晚（1/24 15:00 → 1/25 10:00）</span></div>
+        <div class="l-area">Yamagata Sta.</div>
+        <div class="l-name">SUPER HOTEL 山形站西口天然溫泉</div>
+        <div class="l-desc">山形站西口步行約 1–2 分，有天然溫泉大浴場。抵達日從仙台搭巴士進來已經傍晚，住站邊最省力。</div>
+        <div class="l-pick">◆ 含早餐 ✅ · 待確認：大浴場開放時段、退房後行李寄放（Day 2 去山寺）</div>
+      </div>
+      <div class="lodge" style="--a:var(--frost)">
+        <div class="l-top"><span class="l-chk">✅ 已訂</span><span class="l-when">藏王溫泉 · 2 晚連泊（1/25 14:00 → 1/27 10:00）</span></div>
+        <div class="l-area">Zao Onsen</div>
+        <div class="l-name">藏王おおみや旅館（Oomiya Ryokan）</div>
+        <div class="l-desc">藏王溫泉街上的老牌和風旅館，自家源泉的強酸性硫磺泉。連泊兩晚，Day 3 全天滑雪、Day 4 早上上樹冰，中間不用搬家。</div>
+        <div class="l-pick">◆ Day 4 退房 10:00：上 Ropeway 前就要退房，確認行李能寄放到下午 · 含早餐 ✅，晚餐待確認 · 待確認：巴士總站接送、雪具寄放與烘乾、住客纜車票優惠</div>
+      </div>
+      <div class="lodge" style="--a:var(--night)">
+        <div class="l-top"><span class="l-chk">✅ 已訂</span><span class="l-when">山形 · 1 晚（1/27 15:00 → 1/28 10:00）</span></div>
+        <div class="l-area">Yamagata Sta.</div>
+        <div class="l-name">SUPER HOTEL 山形站西口天然溫泉</div>
+        <div class="l-desc">下藏王後的中繼站，隔天要搭つばさ往大石田趕中午的接駁，住站邊最保險。滑完雪泡個溫泉再睡。</div>
+        <div class="l-pick">◆ 含早餐 ✅ · 同一間住兩次，兩筆訂單分開，Check-in 時記得都確認</div>
+      </div>
+      <div class="lodge" style="--a:var(--lamp)">
+        <div class="l-top"><span class="l-chk">✅ 已訂</span><span class="l-when">銀山溫泉 · 1 晚（1/28 → 1/29 11:00）</span></div>
+        <div class="l-area">Ginzan Onsen</div>
+        <div class="l-name">御宿 やなだ屋 別館（川側客室 6 疊）</div>
+        <div class="l-desc">冬期限定事前決済的<b>素泊方案：不含晚餐、早餐，也不含溫泉</b>，已刷卡付清，附大石田駅來回接駁（去程 1/28 預約登記 13:40、官網寫 13:30，旅館沒回信，提早到站等；回程 1/29 10:10）。退房期限 11:00、不可延長。溫泉街車輛管制，住客才走得到的夜晚燈景是這趟的重點之一。</div>
+        <div class="l-pick">◆ 加餐詢問中；問到之前，晚餐與隔天早餐先照自理規劃 · 泡湯去共同浴場しろがね湯 · 待確認：大石田駅上車地點、別館入住櫃台位置 · 線上變更期限：入住前一天 15:00</div>
+      </div>
+      <div class="lodge" style="--a:var(--wine)">
+        <div class="l-top"><span class="l-chk">✅ 已訂</span><span class="l-when">仙台 · 1 晚（1/29 15:00 → 1/30 11:00）</span></div>
+        <div class="l-area">Sendai Sta.</div>
+        <div class="l-name">仙台站前多美迎飯店（Dormy Inn 仙台駅前）</div>
+        <div class="l-desc">仙台站步行可到，有大浴場與宵夜拉麵。最後一晚採買與吃牛舌都在站周邊，隔天機場線 25 分就到，回程完全不趕。</div>
+        <div class="l-pick">◆ 不含早餐，Day 7 早餐自理 · 待確認：寄行李時段（Day 6 下午先寄、Day 7 退房後再寄）</div>
+      </div>
+    </div>
+    <div class="box plain"><b>搬家四次：</b>Day 2 下午 山形 → 藏王；Day 4 下午 藏王 → 山形；Day 5 中午 山形 → 大石田 → 銀山；Day 6 中午 銀山 → 大石田 → 山形 → 仙台。其中 <b>Day 5 與 Day 6 都卡在旅館接駁時間</b>（去程 13:30／13:40、回程 10:10），列車要先訂好，抓足緩衝。</div>
+  </section>
+
+  <!-- ===== 04 滑雪・樹冰 ===== -->
+  <section class="view">
+    <div class="v-head">
+      <div class="eyebrow">Ski &amp; Snow Monsters</div>
+      <h2 class="v-title">滑雪・樹冰</h2>
+      <p class="lede">藏王待整整兩個整天：Day 3 全天單板，Day 4 早上上 Ropeway 看樹冰。1 月下旬是東北雪季最穩、樹冰也最完整的時候，但也是最冷、最容易因強風停駛纜車的時候。</p>
+    </div>
+
+    <h3 class="sec-h">雪場</h3>
+    <div class="steps">
+      <div class="step" style="--a:var(--frost)"><div class="step-t">藏王溫泉滑雪場</div><div class="step-d"><a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E8%94%B5%E7%8E%8B%E6%B8%A9%E6%B3%89%E3%82%B9%E3%82%AD%E3%83%BC%E5%A0%B4">📍 蔵王温泉スキー場</a> 日本最大級的單一雪場之一，約 15 條雪道、30 餘部纜車／吊椅，從溫泉街直接連上山。</div><div class="step-n">雪道橫跨很大一片山，初學到高級都有；動線複雜，第一天先拿雪道圖、挑上の台～中央區的寬緩道熱身，別一開始就往樹氷高原衝。</div></div>
+      <div class="step" style="--a:var(--frost)"><div class="step-t">纜車票（1 日券）</div><div class="step-d">滑雪只排 1 天（Day 3），買 <b>1 日券</b> 即可，約 ¥6,500–7,000（屆時以官網為準）。Day 4 的樹冰另外買 Ropeway 往復票。</div><div class="step-n">待確認：旅館有無住客優惠票；1 日券是否含藏王 Ropeway 區間（部分票種不含，要看清楚）。</div></div>
+      <div class="step" style="--a:var(--frost)"><div class="step-t">裝備租借（1 天，先預約）</div><div class="step-d">單板整組（板／靴／安全帽），必要時加租雪衣褲。<b>Day 3 早上領、當天傍晚還</b>。</div><div class="step-n">自備：手套、毛帽、護目鏡（樹冰日也用得到）、防摔褲、厚襪、面罩。溫泉街有數家租借店，線上先訂比較保險。</div></div>
+    </div>
+
+    <h3 class="sec-h">樹冰</h3>
+    <div class="steps">
+      <div class="step" style="--a:var(--frost)"><div class="step-t">藏王 Ropeway（Day 4 早上）</div><div class="step-d"><a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E8%94%B5%E7%8E%8B%E3%83%AD%E3%83%BC%E3%83%97%E3%82%A6%E3%82%A7%E3%82%A4+%E8%94%B5%E7%8E%8B%E5%B1%B1%E9%BA%93%E9%A7%85">📍 蔵王ロープウェイ 蔵王山麓駅</a> → 樹氷高原駅 →（山頂線）→ <a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E8%94%B5%E7%8E%8B%E3%83%AD%E3%83%BC%E3%83%97%E3%82%A6%E3%82%A7%E3%82%A4+%E5%9C%B0%E8%94%B5%E5%B1%B1%E9%A0%82%E9%A7%85">📍 地蔵山頂駅</a>。往復約 ¥3,500–4,000。</div><div class="step-n">樹冰觀賞期約 1 月中～3 月上旬，<b>1 月下旬正值最佳</b>。一早班次人少、光線好；假日與中午常排長隊。</div></div>
+      <div class="step" style="--a:var(--wine)"><div class="step-t">夜間點燈（Day 3 晚上的加碼選項）</div><div class="step-d">每年 1–2 月特定日有 <b>樹冰夜間點燈</b>，以纜車或雪上車上山看打燈的樹冰。</div><div class="step-n">需事先確認實施日期與預約方式；滑完一整天還要上山會很累，體力有餘再排。</div></div>
+      <div class="step" style="--a:var(--stone)"><div class="step-t">山頂裝備與天氣</div><div class="step-d">地藏山頂冬天常在 −10℃ 上下，加上強風體感更低，且常起霧。</div><div class="step-n">防風外層、面罩、護目鏡、厚手套缺一不可；手機在低溫下掉電很快，帶行動電源並貼暖暖包。</div></div>
+    </div>
+
+    <h3 class="sec-h">藏王兩天節奏</h3>
+    <div class="scroll-x">
+      <table class="tbl">
+        <thead><tr><th>日期</th><th>住</th><th>安排</th><th>重點</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl">Day 2 · 1/25</td><td class="seg">藏王おおみや</td><td>上午山寺，下午巴士上山入住，傍晚泡湯</td><td class="num">移動日</td></tr>
+          <tr><td class="lbl">Day 3 · 1/26</td><td class="seg">藏王おおみや</td><td>全天單板；晚上泡湯，可選樹冰夜間點燈</td><td class="num">滑雪主力</td></tr>
+          <tr><td class="lbl">Day 4 · 1/27</td><td class="seg">山形 SUPER HOTEL</td><td>早上 Ropeway 看樹冰，中午溫泉街，下午巴士下山</td><td class="num">樹冰半天</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="box"><b>天氣備案：</b>Ropeway 遇強風停駛時，Day 4 早上改成溫泉街共同浴場＋足湯＋藏王溫泉神社，或直接提早下山，把時間留給山形市區（文翔館、霞城公園）。若 Day 3 雪況／天候太差，也可把滑雪與樹冰對調——反正兩天都住同一間旅館，順序很好換。</div>
+  </section>
+
+  <!-- ===== 05 交通 ===== -->
+  <section class="view">
+    <div class="v-head">
+      <div class="eyebrow">Transport</div>
+      <h2 class="v-title">交通</h2>
+      <p class="lede">全程 JR、巴士、旅館接駁與步行，不租車。骨幹是三條線：仙台 ⇄ 山形（高速巴士約 70 分）、山形 ⇄ 藏王（山交巴士約 40 分）、山形 ⇄ 大石田（山形新幹線つばさ約 35 分）。地點名稱都是按鈕，點一下開 Google Maps。時刻與票價為概略，訂票時以官方為準。</p>
+    </div>
+
+    <h3 class="sec-h">長途一覽</h3>
+    <div class="scroll-x">
+      <table class="tbl">
+        <thead><tr><th>日期</th><th>區間</th><th>方式</th><th>車資</th></tr></thead>
+        <tbody>
+          <tr><td class="lbl">Day 1 · 1/24</td><td class="seg">仙台機場 → 仙台</td><td>仙台機場 Access 線 快速 17 分／普通 25 分</td><td class="num">約 ¥660</td></tr>
+          <tr><td class="lbl">Day 1 · 1/24</td><td class="seg">仙台 → 山形</td><td>高速巴士（山交／JR）約 70 分，不需預約</td><td class="num">約 ¥1,100</td></tr>
+          <tr><td class="lbl">Day 2 · 1/25</td><td class="seg">山形 ⇄ 山寺</td><td>JR 仙山線 約 20 分（來回）</td><td class="num">約 ¥480</td></tr>
+          <tr><td class="lbl">Day 2 · 1/25</td><td class="seg">山形 → 藏王溫泉</td><td>山交巴士 約 40 分</td><td class="num">約 ¥1,000</td></tr>
+          <tr><td class="lbl">Day 4 · 1/27</td><td class="seg">藏王溫泉 → 山形</td><td>山交巴士 約 40 分</td><td class="num">約 ¥1,000</td></tr>
+          <tr><td class="lbl">Day 4 · 1/27</td><td class="seg">藏王 Ropeway 往復</td><td>山麓 → 樹氷高原 → 地藏山頂（樹冰）</td><td class="num">約 ¥3,500–4,000</td></tr>
+          <tr><td class="lbl">Day 5 · 1/28</td><td class="seg">山形 → 大石田</td><td>山形新幹線 つばさ 約 35 分（<b>全車指定席</b>）</td><td class="num">約 ¥2,400</td></tr>
+          <tr><td class="lbl">Day 5 · 1/28</td><td class="seg">大石田 → 銀山溫泉</td><td>御宿 やなだ屋 接駁 13:30／13:40（13:20 前到站等）</td><td class="num">旅館提供</td></tr>
+          <tr><td class="lbl">Day 6 · 1/29</td><td class="seg">銀山溫泉 → 大石田</td><td>御宿 やなだ屋 接駁 10:10 ✅</td><td class="num">旅館提供</td></tr>
+          <tr><td class="lbl">Day 6 · 1/29</td><td class="seg">大石田 → 山形</td><td>山形新幹線 つばさ 約 35 分（<b>全車指定席</b>）</td><td class="num">約 ¥2,400</td></tr>
+          <tr><td class="lbl">Day 6 · 1/29</td><td class="seg">山形 → 仙台</td><td>高速巴士 約 70 分／仙山線快速 約 80 分</td><td class="num">約 ¥1,100</td></tr>
+          <tr><td class="lbl">Day 7 · 1/30</td><td class="seg">仙台 → 仙台機場</td><td>仙台機場 Access 線 約 25 分</td><td class="num">約 ¥660</td></tr>
+        </tbody>
+        <tfoot><tr><td colspan="3">交通合計（概估，每人）</td><td class="num">約 ¥14,300–14,800</td></tr></tfoot>
+      </table>
+    </div>
+    <div class="box plain"><b>要先訂的只有兩段：</b>Day 5 山形 → 大石田、Day 6 大石田 → 山形 的 <b>つばさ 指定席</b>（えきねっと）。其餘高速巴士與山交巴士現場買票或刷 IC 卡即可。<b>JR East Pass（東北地區）</b>：這趟 JR 使用量不大（機場線＋仙山線＋兩段つばさ），總額約 ¥6,000–7,000，遠低於 Pass 價格，<b>不划算，不建議買</b>。</div>
+
+    <h3 class="sec-h">Day 1｜仙台機場 → 仙台 → 山形</h3>
+    <div class="steps">
+      <div class="step" style="--a:var(--night)"><div class="step-t">14:25 抵達</div><div class="step-d"><a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E4%BB%99%E5%8F%B0%E7%A9%BA%E6%B8%AF">📍 仙台空港</a> 直接連通 <b>仙台機場 Access 線</b>月台 → <a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=JR+%E4%BB%99%E5%8F%B0%E9%A7%85">📍 JR 仙台駅</a>，快速 17 分／普通 25 分、約 ¥660。</div><div class="step-n">機場站就在航廈內，走路 3 分鐘。落地後先買／儲值 Suica，之後巴士與 JR 都能刷。</div></div>
+      <div class="step" style="--a:var(--night)"><div class="step-t">仙台 → 山形（高速巴士）</div><div class="step-d"><a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E4%BB%99%E5%8F%B0%E9%A7%85%E5%89%8D+%E9%AB%98%E9%80%9F%E3%83%90%E3%82%B9%E4%B9%97%E5%A0%B4">📍 仙台駅前 高速バス乗り場</a> → <a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E5%B1%B1%E5%BD%A2%E9%A7%85%E5%89%8D+%E3%83%90%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB">📍 山形駅前バスターミナル</a>，約 70 分、約 ¥1,100。</div><div class="step-n">仙台 ⇄ 山形 這條是東北班次最密的高速巴士之一，尖峰約 20–30 分一班，不用預約、直接上車。比 JR 仙山線快也便宜。下雪天可能誤點，不趕時間就好。</div></div>
+    </div>
+
+    <h3 class="sec-h">Day 2｜山形 ⇄ 山寺 · 山形 → 藏王</h3>
+    <div class="steps">
+      <div class="step" style="--a:var(--pine)"><div class="step-t">山寺（仙山線）</div><div class="step-d"><a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=JR+%E5%B1%B1%E5%BD%A2%E9%A7%85">📍 JR 山形駅</a> → <a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=JR+%E5%B1%B1%E5%AF%BA%E9%A7%85">📍 JR 山寺駅</a> 約 20 分、¥240 → 步行 5 分到 <a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E5%AE%9D%E7%8F%A0%E5%B1%B1+%E7%AB%8B%E7%9F%B3%E5%AF%BA">📍 宝珠山 立石寺</a>。</div><div class="step-n">冬天班次約 1 小時 1–2 班，去回時刻都要先查。1,015 階在雪季會結冰，防滑鞋底必備，不趕時間慢慢爬。</div></div>
+      <div class="step" style="--a:var(--frost)"><div class="step-t">山形 → 藏王溫泉（山交巴士）</div><div class="step-d"><a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E5%B1%B1%E5%BD%A2%E9%A7%85%E5%89%8D+%E3%83%90%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB">📍 山形駅前バスターミナル 1 番乗り場</a> → <a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E8%94%B5%E7%8E%8B%E6%B8%A9%E6%B3%89%E3%83%90%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB">📍 蔵王温泉バスターミナル</a>，約 40 分、約 ¥1,000。</div><div class="step-n">冬天約每小時 1 班，末班約 18–19 點（屆時確認）。巴士總站到溫泉街旅館多半是上坡雪路，行李重就先問旅館能否接送。</div></div>
+    </div>
+
+    <h3 class="sec-h">Day 5｜山形 → 大石田 → 銀山溫泉</h3>
+    <div class="steps">
+      <div class="step" style="--a:var(--lamp)"><div class="step-t">つばさ（需劃位）</div><div class="step-d"><a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=JR+%E5%B1%B1%E5%BD%A2%E9%A7%85">📍 JR 山形駅</a> → <a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=JR+%E5%A4%A7%E7%9F%B3%E7%94%B0%E9%A7%85">📍 JR 大石田駅</a>，山形新幹線 つばさ 約 35 分、約 ¥2,400。</div><div class="step-n">つばさ 自 2024 年起全車指定席，用えきねっと先劃位。建議訂<b>約 12:16 抵大石田</b>的那班（依 2026 年 7 月時刻資料為つばさ 131 號，訂票時以えきねっと為準）。下一班約 13:16 才到，接駁若是 13:30 只剩 14 分鐘；冬天つばさ從東京一路開上來，遇雪容易誤點。在來線（奧羽本線）約 60 分、約 ¥1,170，是省錢但風險較高的備案。</div></div>
+      <div class="step" style="--a:var(--lamp)"><div class="step-t">13:30／13:40 旅館接駁（13:20 前到站等）</div><div class="step-d">大石田駅 → <a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E9%8A%80%E5%B1%B1%E6%B8%A9%E6%B3%89">📍 銀山温泉</a>，御宿 やなだ屋 提供，約 40 分。</div><div class="step-n">旅館沒回信，照預約時間自行到站等。<b>等到 13:50 接駁還沒來</b>，依序：① 打旅館電話 0237-28-2030（出發前再跟確認信或官網對一次）；② 聯絡不上就搭 <b>はながさバス（尾花沢・銀山線）</b> 大石田駅 → 銀山温泉，約 40 分、約 ¥720–1,000（各來源寫法不同）。現行時刻大石田駅發 09:50、12:35、14:10、15:55、17:45，但 10/24 後換冬季時刻，出發前再查；③ 計程車，估算約 ¥6,000–8,000，冬天站前車少，最好打電話叫。</div></div>
+      <div class="step" style="--a:var(--lamp)"><div class="step-t">溫泉街內</div><div class="step-d">銀山溫泉街禁止一般車輛進入，下車後步行；<a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E9%8A%80%E5%B1%B1%E6%B8%A9%E6%B3%89+%E7%99%BD%E9%8A%80%E3%81%AE%E6%BB%9D">📍 白銀の滝</a> 步行約 10 分。</div><div class="step-n">石板路加上積雪非常滑，行李箱不好拖；貴重物品與相機用背的比較安全。</div></div>
+    </div>
+
+    <h3 class="sec-h">Day 6｜銀山 → 大石田 → 山形 → 仙台</h3>
+    <div class="steps">
+      <div class="step" style="--a:var(--wine)"><div class="step-t">10:10 旅館接駁 ✅</div><div class="step-d"><a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E9%8A%80%E5%B1%B1%E6%B8%A9%E6%B3%89">📍 銀山温泉</a> → <a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=JR+%E5%A4%A7%E7%9F%B3%E7%94%B0%E9%A7%85">📍 JR 大石田駅</a>，約 40 分。</div><div class="step-n">10:10 出發，約 10:50 到站；接著的つばさ同樣要先劃位，抓 11:20 前後那班。</div></div>
+      <div class="step" style="--a:var(--wine)"><div class="step-t">山形 → 仙台</div><div class="step-d">高速巴士 <a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E5%B1%B1%E5%BD%A2%E9%A7%85%E5%89%8D+%E3%83%90%E3%82%B9%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB">📍 山形駅前</a> → <a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E4%BB%99%E5%8F%B0%E9%A7%85%E5%89%8D+%E9%AB%98%E9%80%9F%E3%83%90%E3%82%B9%E4%B9%97%E5%A0%B4">📍 仙台駅前</a> 約 70 分 ¥1,100，或 JR 仙山線快速約 80 分 ¥1,170。</div><div class="step-n">巴士直達仙台站前，拖行李比較順；仙山線的好處是班次固定、不受路況影響。當天看天氣決定。</div></div>
+      <div class="step" style="--a:var(--wine)"><div class="step-t">仙台站周邊</div><div class="step-d"><a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E3%83%89%E3%83%BC%E3%83%9F%E3%83%BC%E3%82%A4%E3%83%B3+%E4%BB%99%E5%8F%B0%E9%A7%85%E5%89%8D">📍 ドーミーイン仙台駅前</a>　／　<a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E4%BB%99%E5%8F%B0%E9%A7%85+%E7%89%9B%E3%81%9F%E3%82%93%E9%80%9A%E3%82%8A">📍 仙台駅 牛たん通り</a>　／　<a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E4%B8%80%E7%95%AA%E7%94%BA%E3%82%A2%E3%83%BC%E3%82%B1%E3%83%BC%E3%83%89+%E4%BB%99%E5%8F%B0">📍 一番町アーケード</a></div><div class="step-n">牛舌名店晚餐時段常排隊，想吃特定店家建議提前訂位或改中午去。</div></div>
+    </div>
+
+    <h3 class="sec-h">Day 7｜仙台 → 仙台機場</h3>
+    <div class="steps">
+      <div class="step" style="--a:var(--stone)"><div class="step-t">~13:40 機場線</div><div class="step-d"><a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=JR+%E4%BB%99%E5%8F%B0%E9%A7%85">📍 JR 仙台駅</a> → 仙台機場 Access 線 約 25 分、¥660 → <a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E4%BB%99%E5%8F%B0%E7%A9%BA%E6%B8%AF">📍 仙台空港</a>。</div><div class="step-n">目標 14:10 前後抵達，離 16:15 起飛約 2 小時，報到、退稅、安檢都夠。仙台機場不大，免稅店選擇有限，伴手禮建議在仙台站買齊。</div></div>
+    </div>
+
+    <div class="box plain"><b>使用提醒：</b>本頁為草案。列車班次尚未購買；票價、巴士時刻、纜車運行與樹冰點燈日期，行前以 JR 東日本、山交巴士、藏王 Ropeway 官網確認，航班以長榮 App 為準。</div>
+  </section>
+
+</main>
+
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="單日行程" hidden>
+  <header class="sheet-bar">
+    <button class="sheet-x" id="sheetx" aria-label="關閉">
+      <svg viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></svg>
+    </button>
+    <div class="sheet-id"><span class="sheet-no" id="sheetno">Day 1</span><span class="sheet-date" id="sheetdate"></span></div>
+    <div class="sheet-nav">
+      <button id="sprev" aria-label="前一天">‹</button>
+      <button id="snext" aria-label="後一天">›</button>
+    </div>
+  </header>
+  <div class="sheet-body" id="sheetbody"></div>
+</div>
+
+<footer class="foot"><div class="wrap">仙台・山形・藏王・銀山溫泉 2027.1.24–1.30 · 行前請以官方公告為準</div></footer>
+
+<script>
+(function(){
+  var navin = document.getElementById('navin');
+  var tabs  = [].slice.call(navin.querySelectorAll('.nav-i'));
+  var ind   = document.getElementById('navind');
+  var views = [].slice.call(document.querySelectorAll('.view'));
+  var main  = document.getElementById('main');
+  var mast  = document.querySelector('.mast');
+  var days  = [].slice.call(document.querySelectorAll('.daystore .day'));
+  var idx = 0, busy = false;
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- 區塊切換 ---------- */
+  function follow(box, el){
+    if (!box || !el) return;
+    var l = el.offsetLeft, r = l + el.offsetWidth, pad = 18;
+    if (l < box.scrollLeft + pad) box.scrollTo({left: Math.max(0, l - pad), behavior: reduce ? 'auto' : 'smooth'});
+    else if (r > box.scrollLeft + box.clientWidth - pad) box.scrollTo({left: r - box.clientWidth + pad, behavior: reduce ? 'auto' : 'smooth'});
+  }
+
+  function placeInd(){
+    var t = tabs[idx];
+    ind.style.width = t.offsetWidth + 'px';
+    ind.style.transform = 'translateX(' + t.offsetLeft + 'px)';
+  }
+
+  function show(i, then){
+    i = Math.max(0, Math.min(views.length - 1, i));
+    if (busy) return;
+    tabs.forEach(function(t, k){
+      t.classList.toggle('on', k === i);
+      t.setAttribute('aria-selected', k === i ? 'true' : 'false');
+    });
+    if (i === idx){ if (then) then(); return; }
+
+    busy = true;
+    var cur = views[idx], nxt = views[i];
+    idx = i;
+    placeInd();
+    follow(navin, tabs[i]);
+    cur.classList.add('out');
+
+    setTimeout(function(){
+      cur.classList.remove('on', 'out');
+      nxt.classList.add('pre', 'on');
+      var top = mast.offsetHeight;
+      if (window.pageYOffset > top) window.scrollTo(0, top);
+      requestAnimationFrame(function(){
+        requestAnimationFrame(function(){
+          nxt.classList.remove('pre');
+          busy = false;
+          if (then) then();
+        });
+      });
+    }, reduce ? 0 : 160);
+  }
+
+  tabs.forEach(function(t, i){ t.addEventListener('click', function(){ show(i); }); });
+
+  /* ---------- 滿版單日 ---------- */
+  var sheet = document.getElementById('sheet');
+  var sbody = document.getElementById('sheetbody');
+  var sno   = document.getElementById('sheetno');
+  var sdate = document.getElementById('sheetdate');
+  var sprev = document.getElementById('sprev');
+  var snext = document.getElementById('snext');
+  var sx    = document.getElementById('sheetx');
+  var open  = -1, pushed = false, lastFocus = null;
+
+  function fill(d){
+    var src = days[d];
+    sbody.innerHTML = '';
+    var box = document.createElement('div');
+    box.className = 'sheet-in';
+    box.appendChild(src.cloneNode(true));
+    sbody.appendChild(box);
+    sbody.scrollTop = 0;
+    sheet.style.setProperty('--a', src.style.getPropertyValue('--a') || 'var(--night)');
+    sno.textContent = src.querySelector('.dno').textContent;
+    sdate.textContent = src.querySelector('.ddate').textContent;
+    sprev.disabled = (d === 0);
+    snext.disabled = (d === days.length - 1);
+    open = d;
+  }
+
+  function openDay(d){
+    if (!days[d]) return;
+    if (open >= 0){                       /* 已開啟：換天，輕微淡出淡入 */
+      if (d === open) return;
+      if (reduce){ fill(d); return; }
+      sbody.classList.add('fade');
+      setTimeout(function(){ fill(d); sbody.classList.remove('fade'); }, 150);
+      return;
+    }
+    lastFocus = document.activeElement;
+    fill(d);
+    sheet.hidden = false;
+    document.body.classList.add('locked');
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){ sheet.classList.add('open'); });
+    });
+    sx.focus({preventScroll: true});
+    try { if (!pushed){ history.pushState({sheet: 1}, ''); pushed = true; } } catch (e) {}
+  }
+
+  function closeDay(fromPop){
+    if (open < 0) return;
+    open = -1;
+    sheet.classList.remove('open');
+    document.body.classList.remove('locked');
+    setTimeout(function(){
+      if (open < 0){ sheet.hidden = true; sbody.innerHTML = ''; }
+    }, reduce ? 0 : 280);
+    if (fromPop) pushed = false;
+    else { try { if (pushed){ pushed = false; history.back(); } } catch (e) {} }
+    if (lastFocus && lastFocus.focus) lastFocus.focus({preventScroll: true});
+  }
+
+  [].slice.call(document.querySelectorAll('.dcard[data-open]')).forEach(function(b){
+    b.addEventListener('click', function(){ openDay(parseInt(b.getAttribute('data-open'), 10) || 0); });
+  });
+  sx.addEventListener('click', function(){ closeDay(false); });
+  sprev.addEventListener('click', function(){ if (open > 0) openDay(open - 1); });
+  snext.addEventListener('click', function(){ if (open >= 0 && open < days.length - 1) openDay(open + 1); });
+  window.addEventListener('popstate', function(){ if (open >= 0) closeDay(true); });
+
+  /* 總覽卡片：切到逐日行程並直接展開那天 */
+  [].slice.call(document.querySelectorAll('.card[data-day]')).forEach(function(b){
+    b.addEventListener('click', function(){
+      var d = parseInt(b.getAttribute('data-day'), 10) || 0;
+      show(1, function(){ openDay(d); });
+    });
+  });
+
+  /* ---------- 鍵盤 ---------- */
+  document.addEventListener('keydown', function(e){
+    if (e.target && /INPUT|TEXTAREA/.test(e.target.tagName)) return;
+    if (open >= 0){
+      if (e.key === 'Escape') closeDay(false);
+      else if (e.key === 'ArrowRight'){ if (open < days.length - 1) openDay(open + 1); }
+      else if (e.key === 'ArrowLeft'){ if (open > 0) openDay(open - 1); }
+      return;
+    }
+    if (e.key === 'ArrowRight') show(idx + 1);
+    else if (e.key === 'ArrowLeft') show(idx - 1);
+  });
+
+  placeInd();
+  window.addEventListener('resize', placeInd);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(placeInd);
+  setTimeout(function(){ main.classList.remove('boot'); }, 700);
+})();
+</script>
+</body>
+</html>
