@@ -6,6 +6,13 @@
 <meta name="color-scheme" content="light only">
 <meta name="robots" content="noindex,nofollow">
 <title>輕井澤 5 天 4 夜 ｜ 2026.11.23–11.27</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0D1B27">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="輕井澤">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap"
@@ -39,6 +46,17 @@
     --sans:"Manrope","PingFang TC","Hiragino Sans","Noto Sans TC","Microsoft JhengHei",system-ui,-apple-system,sans-serif;
     --disp:var(--sans);
     --mono:var(--sans);
+    /* 共用小工具（../kit/trip-kit.js）的配色 */
+    --kit-accent:var(--pine);
+    --kit-ink:var(--ink);
+    --kit-ink-2:var(--ink-2);
+    --kit-muted:var(--ink-3);
+    --kit-line:var(--line);
+    --kit-line-soft:var(--line-soft);
+    --kit-line-strong:#C3CBD1;
+    --kit-card:var(--card);
+    --kit-ink-solid:#14293C;
+    --kit-radius:var(--r);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
@@ -98,6 +116,15 @@
   .nav-ind{
     position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--ink);border-radius:2px;
     transition:transform .38s var(--ease), width .38s var(--ease);
+  }
+
+  /* 從主畫面打開：狀態列蓋在頁面上，導覽列停在它下方，狀態列底下補一條報頭色 */
+  @media (display-mode: standalone){
+    .nav{top:env(safe-area-inset-top,0px)}
+    body::before{
+      content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:150;
+      background:rgba(13,27,39,.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+    }
   }
 
   /* ========== 視圖切換 ========== */
@@ -172,6 +199,11 @@
   .note h4{font-size:14px;font-weight:700;display:flex;align-items:center;gap:8px;margin-bottom:7px}
   .note h4::before{content:"";width:6px;height:6px;background:var(--gold);transform:rotate(45deg)}
   .note p{font-size:12.5px;color:var(--ink-2);line-height:1.65}
+  .note .kit-list{margin-top:6px}
+  .note li[data-todo]{font-size:12.5px;color:var(--ink-2)}
+  .note li[data-todo][data-checked]{color:var(--ink-3)}
+  .note li[data-todo] b{color:var(--ink)}
+  .note li[data-todo][data-checked] b{color:inherit}
 
   /* ========== 每日行程 ========== */
   /* 每日索引卡 */
@@ -414,18 +446,56 @@
       <div class="fl"><div class="c">MM620 · 去程 11/23（一）· ✅ 已開票</div><div class="r">桃園 第一航廈 → 成田 第一航廈</div><div class="t">02:25 起飛 · 06:30 抵達</div></div>
       <div class="fl"><div class="c">MM621 · 回程 11/27（五）· ✅ 已開票</div><div class="r">成田 第一航廈 → 桃園 第一航廈</div><div class="t">12:55 起飛 · 16:15 抵達</div></div>
     </div>
-    <div class="box plain"><b>樂桃航空（LCC）</b>　去程是紅眼班：<b>11/22（日）深夜就要到桃園機場</b>，11/23 清晨落地。回程 12:55 起飛，從上野搭 Skyliner 約 45 分到成田，目標 10:00 前後抵第一航廈，報到、安檢、吃早午餐都來得及。出發前再用樂桃 App 確認一次時刻。</div>
+    <div class="box plain"><b>樂桃航空（LCC）</b>　去程是紅眼班：<b>11/22（日）深夜就要到桃園機場</b>，11/23 清晨落地。回程 12:55 起飛，從上野搭 Skyliner 約 45 分到成田，目標 10:00 前後抵第一航廈，報到、安檢、吃早午餐都來得及。出發前再用樂桃 App 確認一次時刻。
+      <div data-private="peach-pnr" data-label="樂桃訂位代號"></div>
+    </div>
 
     <div class="label">已完成</div>
     <div class="box plain" style="margin-top:0;margin-bottom:6px">✅ 機票 MM620／MM621　✅ 住宿三晚（皆含早餐）　✅ 東館行李寄放（飯店回信確認）<br>✅ Skyliner 來回（Klook）　✅ 新幹線 はくたか 557・568（Klook）　✅ 日本網卡 11/23 起 5 天　✅ 旅平險　✅ 單板＋雪鞋 3 日（East Rental Ski）　✅ 纜車票 11/24・11/25・11/26（住客價，各一張）　✅ Visit Japan Web（入境審查＋海關已登錄）</div>
 
     <div class="label">還要做</div>
+    <p class="hint" style="margin:-4px 0 14px">點一下就能勾掉，勾選只存在這支手機。</p>
     <div class="notes">
-      <div class="note"><h4>出發前：自備物品</h4><p>只租單板和雪鞋，其他都自備：雪衣雪褲、手套、毛帽、護目鏡、防摔褲、厚襪、暖暖包（雪場這些只賣不租）。QR 先<b>截圖存手機</b>，換票時不用等網路：Klook 三張（Skyliner 來回、新幹線）、纜車票三張、雪具預約確認信、Visit Japan Web。</p></div>
-      <div class="note"><h4>換票提醒（旅途中）</h4><p>11/23 出關後到成田 T1 <b>B1</b>：換 Skyliner 去程、JR 售票機領兩張新幹線。11/27 早上在<b>京成上野</b>換 Skyliner 回程，當天劃位。</p></div>
-      <div class="note"><h4>小事，到現場再問</h4><p>Day 1 中午到 APA 輕井澤先寄行李（APA 一般可以，櫃台問一聲）。榆樹街小鎮 11 月下旬有沒有聖誕點燈。</p></div>
+      <div class="note"><h4>出發前：自備物品</h4><p>只租單板和雪鞋，其他都自備，雪場這些只賣不租。</p>
+        <ul class="kit-list">
+          <li data-todo="pack-wear">雪衣雪褲</li>
+          <li data-todo="pack-gloves">手套</li>
+          <li data-todo="pack-beanie">毛帽</li>
+          <li data-todo="pack-goggles">護目鏡</li>
+          <li data-todo="pack-pads">防摔褲</li>
+          <li data-todo="pack-socks">厚襪</li>
+          <li data-todo="pack-warmers">暖暖包</li>
+        </ul>
+      </div>
+      <div class="note"><h4>出發前：QR 截圖存手機</h4><p>換票時不用等網路。</p>
+        <ul class="kit-list">
+          <li data-todo="qr-klook">Klook 三張（Skyliner 來回、新幹線）</li>
+          <li data-todo="qr-lift">纜車票三張</li>
+          <li data-todo="qr-rental">雪具預約確認信</li>
+          <li data-todo="qr-vjw">Visit Japan Web</li>
+        </ul>
+      </div>
+      <div class="note"><h4>換票提醒（旅途中）</h4>
+        <ul class="kit-list">
+          <li data-todo="swap-skyliner-out">11/23 出關後到成田 T1 <b>B1</b>，換 Skyliner 去程</li>
+          <li data-todo="swap-shinkansen">11/23 同一層 JR 售票機，領兩張新幹線</li>
+          <li data-todo="swap-skyliner-back">11/27 早上在<b>京成上野</b>換 Skyliner 回程，當天劃位</li>
+        </ul>
+      </div>
+      <div class="note"><h4>小事，到現場再問</h4>
+        <ul class="kit-list">
+          <li data-todo="ask-apa-luggage">Day 1 中午到 APA 輕井澤先寄行李（APA 一般可以，櫃台問一聲）</li>
+          <li data-todo="ask-harunire-lights">榆樹街小鎮 11 月下旬有沒有聖誕點燈</li>
+        </ul>
+      </div>
       <div class="note"><h4>晚餐（選做）</h4><p>王子飯店是度假村型，館內有好幾間<b>飯店自營</b>餐廳，不是只有一個自助餐。訂房只含早餐（在 Karuizawa Grill），晚餐每間各自點餐付費，可刷卡；能否掛房帳沒查到，現場問。預算大約：Karuizawa Grill ¥6,000 上下，和食、中華 ¥8,000 起，套餐 ¥10,000 起。平價選擇是 Outlet 餐廳區。Day 1 在車站周邊、Day 4 在上野，都還待定。</p></div>
     </div>
+
+    <div class="label">這支手機</div>
+    <div class="box plain" style="margin-top:0">
+      <div data-private="notes" data-label="私人備註" data-multiline data-placeholder="保單號碼、緊急聯絡電話、信用卡掛失專線…"></div>
+    </div>
+    <div data-kit-panel style="margin-top:13px"></div>
   </section>
 
   <!-- ===== 02 逐日行程 ===== -->
@@ -574,6 +644,7 @@
         <div class="l-name">APA 飯店〈輕井澤站前〉輕井澤莊</div>
         <div class="l-desc">輕井澤站北口步行約 1–2 分。抵達日中午先寄行李，15:00 入住；紅眼班機後的補眠站。早餐在本館餐廳「四季」07:00–09:30（最後入場 09:00），Day 2 一開門就吃。</div>
         <div class="l-pick">◆ 待確認：Check-in 前寄放行李（APA 一般可以，Day 1 到櫃台問一聲）</div>
+        <div data-private="lodge-apa-karuizawa" data-label="Agoda 訂單編號"></div>
       </div>
       <div class="lodge" style="--a:var(--teal)">
         <div class="l-top"><span class="l-chk">✅ Agoda 已確認</span><span class="l-when">雪場旁 · 2 晚連泊 · 11/24 15:00 入住 → 11/26 12:00 退房 · 含早餐</span></div>
@@ -581,6 +652,7 @@
         <div class="l-name">輕井澤王子大飯店 東館</div>
         <div class="l-desc">緊鄰王子雪場與 Outlet，走路到纜車。車站南口有免費接駁巴士，步行也約 10–15 分。滑雪三天的基地，Day 3 晚上泡湯。</div>
         <div class="l-pick">◆ 已查：Check-in 15:00／out 12:00；Forest Hot Spring 天然溫泉 06:00–23:00，住客 ¥150；1F 有住客專用租借櫃台與纜車票兌換機。早餐已含在訂單。<b>行李寄放已獲飯店回信確認</b>：入住前、退房後都可以，拿到櫃台即可。訂房部聯絡：spw-karuizawa-rsv@seibugroup.jp</div>
+        <div data-private="lodge-prince-east" data-label="Agoda 訂單編號"></div>
       </div>
       <div class="lodge" style="--a:var(--plum)">
         <div class="l-top"><span class="l-chk">✅ Agoda 已確認</span><span class="l-when">上野 · 1 晚 · 11/26 15:00 入住 → 11/27 10:00 退房 · 含早餐</span></div>
@@ -588,6 +660,7 @@
         <div class="l-name">APA 飯店〈京成上野站前南〉</div>
         <div class="l-desc">東京都台東区上野 2-6-11，2026 年 8 月新開幕，有大浴場。早餐在 1F 餐廳 07:00–10:00。京成上野站步行約 5 分，隔天 Skyliner 直達成田第一航廈約 45 分。Day 4 從輕井澤搭新幹線到 JR 上野站，步行約 10 分；晚上阿美橫町、上野広小路就在旁邊。</div>
         <div class="l-pick">◆ 退房時限 10:00，Day 5 約 09:00 出門剛好；Day 4 約 17:30 抵達，已過 15:00 入住時間</div>
+        <div data-private="lodge-apa-ueno" data-label="Agoda 訂單編號"></div>
       </div>
     </div>
     <div class="box plain"><b>搬家兩次：</b>Day 2 早上 APA 輕井澤 → 東館（車站到雪場，步行或接駁）；Day 4 下午 東館 → 輕井澤站 → 新幹線 → 上野 APA。Day 4 記得先在東館取行李再去車站。</div>
@@ -604,7 +677,7 @@
     <div class="steps">
       <div class="step" style="--a:var(--teal)"><div class="step-t">輕井澤王子大飯店滑雪場</div><div class="step-d"><a class="gmap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=%E8%BB%BD%E4%BA%95%E6%B2%A2%E3%83%97%E3%83%AA%E3%83%B3%E3%82%B9%E3%83%9B%E3%83%86%E3%83%AB%E3%82%B9%E3%82%AD%E3%83%BC%E5%A0%B4">📍 軽井沢プリンスホテルスキー場</a> 車站南口步行約 10 分，Outlet 旁。以人工造雪聞名，長野縣內最早開幕的雪場之一。</div><div class="step-n">往年 11/1 開幕，開幕初期只開 2 條約 400 m 的短雪道，之後陸續開放，1 月上旬才全開 14 條。11/24–26 預期開放數約 3–6 條（需屆時看官網）。</div></div>
       <div class="step" style="--a:var(--teal)"><div class="step-t">纜車票（住客價，一天一張）</div><div class="step-d">Webket「Prince Grand Resort Karuizawa 住宿專用」→ <b>飯店客人的纜車票</b>，每張 ¥7,000。<b>✅ 11/24・11/25・11/26 三張皆已購</b>。</div><div class="step-n">住客價比網路預售（¥7,500）、現場（¥8,000）便宜。每張各有一個 QR，當天早上在東館內住客專用兌換機換成纜車票。</div></div>
-      <div class="step" style="--a:var(--teal)"><div class="step-t">裝備租借 ✅ 已預約（11/24–11/26）</div><div class="step-d"><b>單板組 スノーボードセット（板＋雪鞋）</b>，其他裝備自備。11/24 早上到東館 1F <b>East Rental Ski</b> 出示預約確認信領取，Day 4 約 14:30 還到同一個櫃台（營業約 08:30–17:30）。</div><div class="step-n">預約要更改就回覆確認信上的租借櫃台信箱。手套、毛帽、護目鏡雪場只賣不租，記得帶。</div></div>
+      <div class="step" style="--a:var(--teal)"><div class="step-t">裝備租借 ✅ 已預約（11/24–11/26）</div><div class="step-d"><b>單板組 スノーボードセット（板＋雪鞋）</b>，其他裝備自備。11/24 早上到東館 1F <b>East Rental Ski</b> 出示預約確認信領取，Day 4 約 14:30 還到同一個櫃台（營業約 08:30–17:30）。</div><div class="step-n">預約要更改就回覆確認信上的租借櫃台信箱。手套、毛帽、護目鏡雪場只賣不租，記得帶。</div><div data-private="rental-east" data-label="East Rental Ski 預約編號"></div></div>
     </div>
 
     <h3 class="sec-h">三天節奏</h3>
@@ -677,7 +750,10 @@
         </tbody>
       </table>
     </div>
-    <div class="box plain">換票方式以 <b>Klook 憑證頁寫的為準</b>。成田第一航廈 B1 同一層有京成和 JR 兩個車站；Skyliner 櫃台約 07:00 開，京成上野的換票點約 05:10–20:20。</div>
+    <div class="box plain">換票方式以 <b>Klook 憑證頁寫的為準</b>。成田第一航廈 B1 同一層有京成和 JR 兩個車站；Skyliner 櫃台約 07:00 開，京成上野的換票點約 05:10–20:20。
+      <div data-private="klook-skyliner" data-label="Klook 訂單編號（Skyliner）"></div>
+      <div data-private="klook-shinkansen" data-label="Klook 訂單編號（新幹線）"></div>
+    </div>
     <div class="box"><b>11/23 是日本的勤労感謝の日</b>，也是 11/21–11/23 三連休的最後一天。人潮主要是從輕井澤回東京，你走的是反方向，不至於擠，但新幹線還是一開賣就訂。</div>
 
     <h3 class="sec-h">Day 1｜成田 → 京成上野 → 輕井澤</h3>
@@ -772,7 +848,7 @@
     setTimeout(function(){
       cur.classList.remove('on', 'out');
       nxt.classList.add('pre', 'on');
-      var top = mast.offsetHeight;          /* .nav is sticky: its offsetTop tracks the scroll */
+      var top = mast.offsetHeight - (parseFloat(getComputedStyle(navin.parentNode).top) || 0);   /* .nav is sticky: its offsetTop tracks the scroll；主畫面模式下停在狀態列下方 */
       if (window.pageYOffset > top) window.scrollTo(0, top);
       requestAnimationFrame(function(){
         requestAnimationFrame(function(){
@@ -880,5 +956,6 @@
   setTimeout(function(){ main.classList.remove('boot'); }, 700);
 })();
 </script>
+<script src="../kit/trip-kit.js" defer></script>
 </body>
 </html>

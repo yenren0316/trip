@@ -6,6 +6,13 @@
 <meta name="color-scheme" content="light only">
 <meta name="robots" content="noindex,nofollow">
 <title>仙台・山形・藏王・銀山溫泉 7 天 6 夜 ｜ 2027.1.24–1.30</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#14212C">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="仙台山形">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;700;900&family=Cormorant+Garamond:wght@600;700&display=swap"
@@ -39,6 +46,18 @@
     --serif:"Noto Serif TC","Songti TC","Hiragino Mincho ProN","Yu Mincho",Georgia,"PingFang TC",serif;
     --disp:"Cormorant Garamond",var(--serif);
     --sans:"PingFang TC","Hiragino Sans","Noto Sans TC","Microsoft JhengHei",system-ui,-apple-system,sans-serif;
+    /* 共用小工具（../kit/trip-kit.js）的配色 */
+    --kit-accent:var(--pine);
+    --kit-ink:var(--ink);
+    --kit-ink-2:var(--ink-2);
+    --kit-muted:var(--ink-3);
+    --kit-line:var(--line);
+    --kit-line-soft:var(--line-soft);
+    --kit-line-strong:#CFC3B1;
+    --kit-card:var(--card);
+    --kit-ink-solid:var(--night);
+    --kit-warn:var(--lamp);
+    --kit-radius:var(--r);
   }
   *{margin:0;padding:0;box-sizing:border-box}
   html{-webkit-text-size-adjust:100%}
@@ -108,6 +127,15 @@
     background:linear-gradient(140deg,#2B4356,#3C5C70);
     box-shadow:0 4px 14px rgba(43,67,86,.26);
     transition:transform .42s var(--ease), width .42s var(--ease);
+  }
+
+  /* 從主畫面打開：狀態列蓋在頁面上，導覽列停在它下方，狀態列底下補一條報頭色 */
+  @media (display-mode: standalone){
+    .nav{top:env(safe-area-inset-top,0px)}
+    body::before{
+      content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:150;
+      background:rgba(20,33,44,.92);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);
+    }
   }
 
   /* ========== 視圖切換 ========== */
@@ -186,6 +214,11 @@
   .note h4{font-family:var(--serif);font-size:14.5px;font-weight:900;letter-spacing:.03em;display:flex;align-items:center;gap:9px;margin-bottom:7px}
   .note h4::before{content:"";width:7px;height:7px;border-radius:50%;background:var(--lamp);flex:0 0 auto}
   .note p{font-size:12.5px;color:var(--ink-2);line-height:1.7}
+  .note[data-todo] h4::before{display:none}
+  .note h4 .kit-check{margin:0}
+  .note .kit-list{margin-top:6px}
+  .note li[data-todo]{font-size:12.5px;color:var(--ink-2)}
+  .note li[data-todo][data-checked]{color:var(--ink-3)}
 
   /* ========== 每日行程 ========== */
   .daystore{display:none}
@@ -458,20 +491,39 @@
       <div class="fl"><div class="c">BR118 · 去程 1/24（日）· 經濟艙 Standard（H）</div><div class="r">桃園 → 仙台</div><div class="t">10:15 起飛 · 14:25 抵達 ｜ 約 3 小時 10 分</div></div>
       <div class="fl"><div class="c">BR117 · 回程 1/30（六）· 經濟艙 Standard（M）</div><div class="r">仙台 → 桃園</div><div class="t">16:15 起飛 · 19:30 抵達 ｜ 約 4 小時 15 分</div></div>
     </div>
-    <div class="box plain"><b>長榮直飛仙台，來回票價 TWD 30,083。</b>去程 14:25 落地，入境領完行李抓 15:10 左右出關，當天要再移動到山形，所以 Day 1 不排景點。回程 16:15 起飛，仙台站到機場只要 25 分鐘，上午還能在仙台走走，抓 13:30 前離開市區即可。</div>
+    <div class="box plain"><b>長榮直飛仙台，來回票價 TWD 30,083。</b>去程 14:25 落地，入境領完行李抓 15:10 左右出關，當天要再移動到山形，所以 Day 1 不排景點。回程 16:15 起飛，仙台站到機場只要 25 分鐘，上午還能在仙台走走，抓 13:30 前離開市區即可。
+      <div data-private="eva-pnr" data-label="長榮訂位代號"></div>
+    </div>
 
     <div class="label">待辦</div>
+    <p class="hint" style="margin:-4px 0 14px">點方框就能勾掉，勾選只存在這支手機。</p>
     <div class="notes">
-      <div class="note"><h4>山形新幹線指定席</h4><p>つばさ 自 2024 年起<b>全車指定席</b>。Day 5 山形 → 大石田、Day 6 大石田 → 山形 兩段要先用えきねっと劃位，尤其 Day 5 要壓在中午接駁前到站，建議訂約 12:16 抵大石田的那班。</p></div>
-      <div class="note"><h4>藏王往返巴士時刻</h4><p>山形站前 ⇄ 藏王溫泉的山交巴士約每小時 1 班，Day 2 下午上山、Day 4 下午下山都要先查好當日班次，冬天有可能誤點。</p></div>
-      <div class="note"><h4>雪票與裝備租借</h4><p>單板整組（板／靴／安全帽）先線上預約 1 天；纜車票買 1 日券。確認旅館有沒有住客優惠票與雪具寄放。</p></div>
-      <div class="note"><h4>樹冰與纜車運行</h4><p>藏王 Ropeway 遇強風會停駛。Day 4 早上先看官網運行狀況，備案是改玩藏王溫泉街或提早回山形。</p></div>
-      <div class="note"><h4>銀山接駁：旅館沒回信</h4><p>預約登記 1/28 大石田駅 13:40、1/29 銀山溫泉 10:10，官網則寫大石田駅發車 13:30。寫信問過旅館沒有回覆，所以照原訂自行前往：<b>13:20 前在大石田站出口等，等到 13:50 沒看到接駁車</b>就打旅館電話，聯絡不上就改搭はながさバス或計程車（見交通頁）。</p></div>
-      <div class="note"><h4>銀山這晚沒有供餐、沒有溫泉</h4><p>やなだ屋訂的方案<b>不含餐也不含溫泉</b>，泡湯要去溫泉街的共同浴場。正在問旅館能不能加餐。問到之前先當作不能加：溫泉街沒有便利商店、餐廳冬天傍晚就收，Day 5 中午在山形站把晚餐和隔天早餐一起買好。</p></div>
-      <div class="note"><h4>餐廳</h4><p>Day 2 山形蕎麥或冷肉蕎麥，Day 6 仙台牛舌（利久／喜助／太助，晚餐建議先訂位），其餘在雪場與旅館內解決。SUPER HOTEL 兩晚與おおみや含早餐，Dormy Inn 不含早；おおみや是否含晚餐待確認。</p></div>
-      <div class="note"><h4>保險 · 裝備</h4><p>確認旅平險含滑雪。自備護目鏡、手套、防摔褲、厚襪、暖暖包；銀山溫泉街雪地濕滑，帶防滑鞋底或冰爪。</p></div>
-      <div class="note"><h4>現金</h4><p>藏王共同浴場、銀山溫泉部分小店與接駁沿線只收現金，先在仙台或山形車站領好日幣。</p></div>
+      <div class="note" data-todo="tsubasa-seats"><h4 data-todo-head>山形新幹線指定席</h4><p>つばさ 自 2024 年起<b>全車指定席</b>。Day 5 山形 → 大石田、Day 6 大石田 → 山形 兩段要先用えきねっと劃位，尤其 Day 5 要壓在中午接駁前到站，建議訂約 12:16 抵大石田的那班。</p></div>
+      <div class="note" data-todo="zao-bus-times"><h4 data-todo-head>藏王往返巴士時刻</h4><p>山形站前 ⇄ 藏王溫泉的山交巴士約每小時 1 班，Day 2 下午上山、Day 4 下午下山都要先查好當日班次，冬天有可能誤點。</p></div>
+      <div class="note" data-todo="lift-and-rental"><h4 data-todo-head>雪票與裝備租借</h4><p>單板整組（板／靴／安全帽）先線上預約 1 天；纜車票買 1 日券。確認旅館有沒有住客優惠票與雪具寄放。</p></div>
+      <div class="note" data-todo="ropeway-status"><h4 data-todo-head>樹冰與纜車運行</h4><p>藏王 Ropeway 遇強風會停駛。Day 4 早上先看官網運行狀況，備案是改玩藏王溫泉街或提早回山形。</p></div>
+      <div class="note" data-todo="ginzan-shuttle"><h4 data-todo-head>銀山接駁：旅館沒回信</h4><p>預約登記 1/28 大石田駅 13:40、1/29 銀山溫泉 10:10，官網則寫大石田駅發車 13:30。寫信問過旅館沒有回覆，所以照原訂自行前往：<b>13:20 前在大石田站出口等，等到 13:50 沒看到接駁車</b>就打旅館電話，聯絡不上就改搭はながさバス或計程車（見交通頁）。</p></div>
+      <div class="note" data-todo="ginzan-meals"><h4 data-todo-head>銀山這晚沒有供餐、沒有溫泉</h4><p>やなだ屋訂的方案<b>不含餐也不含溫泉</b>，泡湯要去溫泉街的共同浴場。正在問旅館能不能加餐。問到之前先當作不能加：溫泉街沒有便利商店、餐廳冬天傍晚就收，Day 5 中午在山形站把晚餐和隔天早餐一起買好。</p></div>
+      <div class="note" data-todo="restaurants"><h4 data-todo-head>餐廳</h4><p>Day 2 山形蕎麥或冷肉蕎麥，Day 6 仙台牛舌（利久／喜助／太助，晚餐建議先訂位），其餘在雪場與旅館內解決。SUPER HOTEL 兩晚與おおみや含早餐，Dormy Inn 不含早；おおみや是否含晚餐待確認。</p></div>
+      <div class="note"><h4>保險 · 裝備</h4>
+        <ul class="kit-list">
+          <li data-todo="insurance-ski">確認旅平險含滑雪</li>
+          <li data-todo="pack-goggles">護目鏡</li>
+          <li data-todo="pack-gloves">手套</li>
+          <li data-todo="pack-pads">防摔褲</li>
+          <li data-todo="pack-socks">厚襪</li>
+          <li data-todo="pack-warmers">暖暖包</li>
+          <li data-todo="pack-cleats">防滑鞋底或冰爪（銀山溫泉街雪地濕滑）</li>
+        </ul>
+      </div>
+      <div class="note" data-todo="cash"><h4 data-todo-head>現金</h4><p>藏王共同浴場、銀山溫泉部分小店與接駁沿線只收現金，先在仙台或山形車站領好日幣。</p></div>
     </div>
+
+    <div class="label">這支手機</div>
+    <div class="box plain" style="margin-top:0">
+      <div data-private="notes" data-label="私人備註" data-multiline data-placeholder="保單號碼、緊急聯絡電話、信用卡掛失專線…"></div>
+    </div>
+    <div data-kit-panel style="margin-top:13px"></div>
   </section>
 
   <!-- ===== 02 逐日行程 ===== -->
@@ -667,6 +719,7 @@
         <div class="l-name">SUPER HOTEL 山形站西口天然溫泉</div>
         <div class="l-desc">山形站西口步行約 1–2 分，有天然溫泉大浴場。抵達日從仙台搭巴士進來已經傍晚，住站邊最省力。</div>
         <div class="l-pick">◆ 含早餐 ✅ · 待確認：大浴場開放時段、退房後行李寄放（Day 2 去山寺）</div>
+        <div data-private="lodge-superhotel-1" data-label="訂房確認碼"></div>
       </div>
       <div class="lodge" style="--a:var(--frost)">
         <div class="l-top"><span class="l-chk">✅ 已訂</span><span class="l-when">藏王溫泉 · 2 晚連泊（1/25 14:00 → 1/27 10:00）</span></div>
@@ -674,6 +727,7 @@
         <div class="l-name">藏王おおみや旅館（Oomiya Ryokan）</div>
         <div class="l-desc">藏王溫泉街上的老牌和風旅館，自家源泉的強酸性硫磺泉。連泊兩晚，Day 3 全天滑雪、Day 4 早上上樹冰，中間不用搬家。</div>
         <div class="l-pick">◆ Day 4 退房 10:00：上 Ropeway 前就要退房，確認行李能寄放到下午 · 含早餐 ✅，晚餐待確認 · 待確認：巴士總站接送、雪具寄放與烘乾、住客纜車票優惠</div>
+        <div data-private="lodge-oomiya" data-label="訂房確認碼"></div>
       </div>
       <div class="lodge" style="--a:var(--night)">
         <div class="l-top"><span class="l-chk">✅ 已訂</span><span class="l-when">山形 · 1 晚（1/27 15:00 → 1/28 10:00）</span></div>
@@ -681,6 +735,7 @@
         <div class="l-name">SUPER HOTEL 山形站西口天然溫泉</div>
         <div class="l-desc">下藏王後的中繼站，隔天要搭つばさ往大石田趕中午的接駁，住站邊最保險。滑完雪泡個溫泉再睡。</div>
         <div class="l-pick">◆ 含早餐 ✅ · 同一間住兩次，兩筆訂單分開，Check-in 時記得都確認</div>
+        <div data-private="lodge-superhotel-2" data-label="訂房確認碼"></div>
       </div>
       <div class="lodge" style="--a:var(--lamp)">
         <div class="l-top"><span class="l-chk">✅ 已訂</span><span class="l-when">銀山溫泉 · 1 晚（1/28 → 1/29 11:00）</span></div>
@@ -688,6 +743,7 @@
         <div class="l-name">御宿 やなだ屋 別館（川側客室 6 疊）</div>
         <div class="l-desc">冬期限定事前決済的<b>素泊方案：不含晚餐、早餐，也不含溫泉</b>，已刷卡付清，附大石田駅來回接駁（去程 1/28 預約登記 13:40、官網寫 13:30，旅館沒回信，提早到站等；回程 1/29 10:10）。退房期限 11:00、不可延長。溫泉街車輛管制，住客才走得到的夜晚燈景是這趟的重點之一。</div>
         <div class="l-pick">◆ 加餐詢問中；問到之前，晚餐與隔天早餐先照自理規劃 · 泡湯去共同浴場しろがね湯 · 待確認：大石田駅上車地點、別館入住櫃台位置 · 線上變更期限：入住前一天 15:00</div>
+        <div data-private="lodge-yanadaya" data-label="訂房確認碼"></div>
       </div>
       <div class="lodge" style="--a:var(--wine)">
         <div class="l-top"><span class="l-chk">✅ 已訂</span><span class="l-when">仙台 · 1 晚（1/29 15:00 → 1/30 11:00）</span></div>
@@ -695,6 +751,7 @@
         <div class="l-name">仙台站前多美迎飯店（Dormy Inn 仙台駅前）</div>
         <div class="l-desc">仙台站步行可到，有大浴場與宵夜拉麵。最後一晚採買與吃牛舌都在站周邊，隔天機場線 25 分就到，回程完全不趕。</div>
         <div class="l-pick">◆ 不含早餐，Day 7 早餐自理 · 待確認：寄行李時段（Day 6 下午先寄、Day 7 退房後再寄）</div>
+        <div data-private="lodge-dormy-sendai" data-label="訂房確認碼"></div>
       </div>
     </div>
     <div class="box plain"><b>搬家四次：</b>Day 2 下午 山形 → 藏王；Day 4 下午 藏王 → 山形；Day 5 中午 山形 → 大石田 → 銀山；Day 6 中午 銀山 → 大石田 → 山形 → 仙台。其中 <b>Day 5 與 Day 6 都卡在旅館接駁時間</b>（去程 13:30／13:40、回程 10:10），列車要先訂好，抓足緩衝。</div>
@@ -765,7 +822,9 @@
         <tfoot><tr><td colspan="3">交通合計（概估，每人）</td><td class="num">約 ¥14,300–14,800</td></tr></tfoot>
       </table>
     </div>
-    <div class="box plain"><b>要先訂的只有兩段：</b>Day 5 山形 → 大石田、Day 6 大石田 → 山形 的 <b>つばさ 指定席</b>（えきねっと）。其餘高速巴士與山交巴士現場買票或刷 IC 卡即可。<b>JR East Pass（東北地區）</b>：這趟 JR 使用量不大（機場線＋仙山線＋兩段つばさ），總額約 ¥6,000–7,000，遠低於 Pass 價格，<b>不划算，不建議買</b>。</div>
+    <div class="box plain"><b>要先訂的只有兩段：</b>Day 5 山形 → 大石田、Day 6 大石田 → 山形 的 <b>つばさ 指定席</b>（えきねっと）。其餘高速巴士與山交巴士現場買票或刷 IC 卡即可。<b>JR East Pass（東北地區）</b>：這趟 JR 使用量不大（機場線＋仙山線＋兩段つばさ），總額約 ¥6,000–7,000，遠低於 Pass 價格，<b>不划算，不建議買</b>。
+      <div data-private="ekinet" data-label="えきねっと 預約編號"></div>
+    </div>
 
     <h3 class="sec-h">Day 1｜仙台機場 → 仙台 → 山形</h3>
     <div class="steps">
@@ -864,7 +923,7 @@
     setTimeout(function(){
       cur.classList.remove('on', 'out');
       nxt.classList.add('pre', 'on');
-      var top = mast.offsetHeight;
+      var top = mast.offsetHeight - (parseFloat(getComputedStyle(navin.parentNode).top) || 0);   /* 主畫面模式下導覽列停在狀態列下方 */
       if (window.pageYOffset > top) window.scrollTo(0, top);
       requestAnimationFrame(function(){
         requestAnimationFrame(function(){
@@ -972,5 +1031,6 @@
   setTimeout(function(){ main.classList.remove('boot'); }, 700);
 })();
 </script>
+<script src="../kit/trip-kit.js" defer></script>
 </body>
 </html>
