@@ -48,6 +48,8 @@ karuizawa-2026-11/
 <script src="../kit/trip-kit.js" defer></script>
 ```
 
+頁面用 Google Fonts 的話，stylesheet 和 `fonts.googleapis.com` 的 preconnect 都要加 `crossorigin`（參考輕井澤頁）。沒加的話瀏覽器不會讓 kit 知道載入了哪些字型檔，第一次打開時字型可能存不到手機，離線就變成系統字型。
+
 `black-translucent` 會讓頁面延伸到 iPhone 狀態列底下，所以頁面必須處理安全區域：viewport 要有 `viewport-fit=cover`，報頭頂端留 `env(safe-area-inset-top)` 的空間，置頂的導覽列在主畫面模式下改停在狀態列下方，並在狀態列底下補一條深色（參考輕井澤頁的 `@media (display-mode: standalone)`）。頁面若沒有處理安全區域，就不要加這一行 meta。
 
 `manifest.webmanifest` 照現有行程的格式寫，`name`、`short_name`、`background_color`、`theme_color` 換成這趟的。圖示用腳本產生（需要 Pillow 和中文字型），配色取自報頭：
