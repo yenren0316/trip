@@ -14,7 +14,8 @@
   var SCRIPT = document.currentScript;
   if (!SCRIPT) return;
   var ROOT = new URL('../', SCRIPT.src);
-  var SLUG = location.pathname.replace(/index\.html$/, '').split('/').filter(Boolean).pop() || 'home';
+  /* 同一趟旅行的第二個頁面（例如新格式試作）在 script 標籤加 data-slug="資料夾名稱"，就會共用同一份手機資料 */
+  var SLUG = SCRIPT.getAttribute('data-slug') || location.pathname.replace(/index\.html$/, '').split('/').filter(Boolean).pop() || 'home';
   var KEY = 'trip-kit:' + SLUG;
   var KEY_CACHED = KEY + ':cachedAt';
 
