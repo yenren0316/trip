@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="color-scheme" content="light only">
+<meta name="robots" content="noindex,nofollow">
+<title>輕井澤 5 天 4 夜｜新格式試作</title>
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0D1B27">
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap" crossorigin
+      media="print" onload="this.media='all'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&display=swap"></noscript>
+<style>
+  /* 新格式試作：打開就是當天、每項一行、細節點開才看、三個分頁。規範見 AGENTS.md「頁面格式」。 */
+  :root{
+    color-scheme: light only;
+    --paper:#FBFBF9; --card:#FFFFFF; --ink:#11171D; --ink-2:#4B555E; --ink-3:#8C959D;
+    --line:#E4E7E5; --line-soft:#EFF1EF; --wash:#F3F6F6;
+    --indigo:#2C5282; --teal:#1D6E86; --pine:#2F6B52; --copper:#A0643A; --gold:#8A6A2F;
+    --r:12px; --tabh:49px; --maxw:680px; --gut:20px;
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --sans:"Manrope","PingFang TC","Hiragino Sans","Noto Sans TC","Microsoft JhengHei",system-ui,-apple-system,sans-serif;
+    /* 共用小工具（../kit/trip-kit.js）的配色 */
+    --kit-accent:var(--pine); --kit-ink:var(--ink); --kit-ink-2:var(--ink-2); --kit-muted:var(--ink-3);
+    --kit-line:var(--line); --kit-line-soft:var(--line-soft); --kit-line-strong:#C3CBD1;
+    --kit-card:var(--card); --kit-ink-solid:#14293C; --kit-radius:var(--r);
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.6;
+    -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:hidden}
+  button{font:inherit;color:inherit;-webkit-tap-highlight-color:transparent}
+  a{color:inherit}
+  b{font-weight:700}
+  .wrap{width:100%;max-width:var(--maxw);margin:0 auto;padding:0 var(--gut)}
+
+  /* ---------- 報頭：只留行程名稱與日期 ---------- */
+  .mast{background:linear-gradient(168deg,#0D1B27 0%,#14293C 55%,#1C334A 100%);color:#fff;
+    padding:calc(18px + env(safe-area-inset-top,0px)) 0 16px}
+  .mast .wrap{display:flex;align-items:flex-end;justify-content:space-between;gap:16px}
+  .m-kick{font-size:10.5px;letter-spacing:.24em;text-transform:uppercase;color:#93AABE;font-weight:600;font-variant-numeric:tabular-nums}
+  .m-title{font-size:25px;font-weight:800;letter-spacing:.05em;line-height:1.2;margin-top:4px}
+  .m-old{flex:0 0 auto;font-size:12px;color:#BBCADA;text-decoration:none;border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:5px 12px;white-space:nowrap}
+
+  /* ---------- 分頁 ---------- */
+  .tabs{position:sticky;top:0;z-index:30;background:rgba(251,251,249,.92);
+    -webkit-backdrop-filter:saturate(1.5) blur(14px);backdrop-filter:saturate(1.5) blur(14px);border-bottom:1px solid var(--line)}
+  .tabs .wrap{display:flex;gap:4px}
+  .tab{flex:1 1 0;border:0;background:none;cursor:pointer;height:var(--tabh);font-size:14.5px;font-weight:700;letter-spacing:.06em;
+    color:var(--ink-3);border-bottom:2px solid transparent;margin-bottom:-1px;transition:color .2s var(--ease),border-color .2s var(--ease)}
+  .tab.on{color:var(--ink);border-bottom-color:var(--ink)}
+  .tab:focus-visible,.chip:focus-visible,.go:focus-visible,summary:focus-visible,.pn button:focus-visible{outline:2px solid var(--indigo);outline-offset:2px}
+  .view{display:none;padding-bottom:calc(64px + env(safe-area-inset-bottom,0px))}
+  .view.on{display:block}
+
+  /* ---------- 行程：日期列 ---------- */
+  .chips{position:sticky;top:var(--tabh);z-index:20;background:rgba(251,251,249,.94);
+    -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+  .chips .wrap{display:flex;gap:8px;overflow-x:auto;scrollbar-width:none;padding-block:9px}
+  .chips .wrap::-webkit-scrollbar{display:none}
+  .chip{flex:0 0 auto;display:flex;flex-direction:column;align-items:center;gap:1px;min-width:62px;cursor:pointer;
+    border:1px solid var(--line);background:var(--card);border-radius:10px;padding:6px 11px 5px;color:var(--ink-2);
+    transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease)}
+  .chip b{font-size:12.5px;font-weight:800;letter-spacing:.04em}
+  .chip span{font-size:10.5px;color:var(--ink-3);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .chip.on{background:#14293C;border-color:#14293C;color:#fff}
+  .chip.on span{color:#B9C8D6}
+  .chip.today:not(.on){border-color:var(--teal)}
+
+  .status{margin-top:14px;font-size:12.5px;color:var(--ink-2);background:var(--wash);border-radius:10px;padding:9px 13px}
+  .status b{color:var(--ink)}
+  .status[hidden]{display:none}
+
+  .day{display:none}
+  .day.on{display:block}
+  .d-head{padding:20px 0 8px}
+  .d-no{font-size:11.5px;font-weight:700;letter-spacing:.1em;color:var(--teal);font-variant-numeric:tabular-nums}
+  .d-sum{font-size:20px;font-weight:800;letter-spacing:.02em;line-height:1.35;margin-top:3px;word-break:keep-all;overflow-wrap:anywhere}
+  .d-stay{font-size:12.5px;color:var(--ink-2);margin-top:5px}
+
+  /* ---------- 行程：每一項一行 ---------- */
+  .its{list-style:none}
+  .it{display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:start;border-top:1px solid var(--line-soft);position:relative}
+  .it:first-child{border-top-color:var(--line)}
+  .it summary,.it .row{display:grid;grid-template-columns:54px minmax(0,1fr) auto;column-gap:12px;align-items:baseline;padding:13px 0;min-height:48px}
+  .it summary{cursor:pointer;list-style:none;-webkit-tap-highlight-color:transparent}
+  .it summary::-webkit-details-marker{display:none}
+  .t{font-size:12px;font-weight:700;color:var(--ink-3);font-variant-numeric:tabular-nums;text-align:right;line-height:1.35;padding-top:2px;word-break:keep-all;overflow-wrap:anywhere}
+  .b{display:block;min-width:0;line-height:1.5}
+  .k{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.03em;padding:1px 7px;border-radius:5px;margin-right:8px;vertical-align:2px;white-space:nowrap}
+  .k-move{background:rgba(44,82,130,.1);color:#24476F}
+  .k-eat{background:rgba(160,100,58,.12);color:#8A5330}
+  .k-see{background:rgba(47,107,82,.12);color:#265A45}
+  .k-ski{background:rgba(29,110,134,.12);color:#175C71}
+  .k-stay{background:rgba(119,130,140,.14);color:#5C666F}
+  .h{font-size:15px;font-weight:700;letter-spacing:.01em;word-break:keep-all;overflow-wrap:anywhere}
+  .w{font-size:12.5px;color:var(--ink-3);margin-left:8px;white-space:nowrap}
+  .cv{align-self:center;width:8px;height:8px;border-right:1.6px solid var(--ink-3);border-bottom:1.6px solid var(--ink-3);
+    transform:rotate(45deg) translate(-2px,-2px);transition:transform .2s var(--ease);margin:0 4px 0 2px}
+  details[open] .cv{transform:rotate(225deg) translate(-2px,-2px)}
+  .more{margin:-4px 0 13px 66px;font-size:13px;line-height:1.7;color:var(--ink-2)}
+  .go{display:grid;place-items:center;width:38px;height:38px;margin:5px 0 0 8px;border-radius:50%;border:1px solid var(--line);background:var(--card);
+    color:var(--indigo);text-decoration:none;transition:background .2s var(--ease),border-color .2s var(--ease)}
+  .go svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linejoin:round}
+  @media (hover:hover) and (pointer:fine){.go:hover{background:rgba(44,82,130,.08);border-color:#C5D2E0}}
+  .go-txt{display:inline-flex;gap:6px;width:auto;height:32px;margin:0;padding:0 12px 0 10px;border-radius:999px;font-size:12.5px;font-weight:700}
+  .go-txt svg{width:14px;height:14px}
+
+  /* 當天：過去的變淡，下一項標出來 */
+  .it.past .t,.it.past .b,.it.past .go{opacity:.45}
+  .it.next::before{content:"";position:absolute;left:calc(var(--gut) * -1 + 6px);top:10px;bottom:10px;width:3px;border-radius:3px;background:var(--teal)}
+  .it.next .t{color:var(--teal)}
+
+  .pn{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
+  .pn button{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:9px 14px;font-size:13px;font-weight:700;color:var(--ink-2);cursor:pointer}
+  .pn button[disabled]{opacity:.35;cursor:default}
+
+  /* ---------- 訂位與票券、清單 ---------- */
+  .sec{font-size:12px;font-weight:800;letter-spacing:.14em;color:var(--ink-3);margin:26px 0 10px}
+  .view>.wrap>.sec:first-child{margin-top:22px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
+  .card + .card{margin-top:10px}
+  .bk-h{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+  .bk-h h3{font-size:15px;font-weight:800;letter-spacing:.01em;line-height:1.45}
+  .st{flex:0 0 auto;font-size:11px;font-weight:700;color:var(--pine);white-space:nowrap}
+  .st.off{color:var(--ink-3)}
+  .bk-l{font-size:13px;line-height:1.7;color:var(--ink-2);margin-top:3px;font-variant-numeric:tabular-nums}
+  .bk-go{margin-top:10px}
+  .card h3.list-h{font-size:14.5px;font-weight:800}
+  .card li[data-todo]{font-size:14px;padding-top:8px;padding-bottom:8px}
+  .card li[data-todo] > .kit-check{top:9px}
+  .foot{margin-top:26px;font-size:12px;color:var(--ink-3);text-align:center}
+
+  @media (min-width:700px){
+    :root{--gut:26px}
+    .m-title{font-size:30px}
+    .t{font-size:12.5px}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="wrap">
+    <div>
+      <p class="m-kick">2026.11.23 – 11.27 · 5 天 4 夜</p>
+      <h1 class="m-title">輕井澤滑雪</h1>
+    </div>
+    <a class="m-old" href="./">原版頁面</a>
+  </div>
+</header>
+
+<nav class="tabs" aria-label="分頁">
+  <div class="wrap">
+    <button class="tab on" data-tab="plan" aria-pressed="true">行程</button>
+    <button class="tab" data-tab="book" aria-pressed="false">訂位與票券</button>
+    <button class="tab" data-tab="list" aria-pressed="false">清單</button>
+  </div>
+</nav>
+
+<main>
+  <!-- ===== 行程：打開就是當天，每一項一行 ===== -->
+  <div class="view on" id="v-plan">
+    <div class="chips"><div class="wrap">
+      <button class="chip on" data-day="1" aria-pressed="true"><b>Day 1</b><span>11/23（一）</span></button>
+      <button class="chip" data-day="2" aria-pressed="false"><b>Day 2</b><span>11/24（二）</span></button>
+      <button class="chip" data-day="3" aria-pressed="false"><b>Day 3</b><span>11/25（三）</span></button>
+      <button class="chip" data-day="4" aria-pressed="false"><b>Day 4</b><span>11/26（四）</span></button>
+      <button class="chip" data-day="5" aria-pressed="false"><b>Day 5</b><span>11/27（五）</span></button>
+    </div></div>
+    <div class="wrap">
+    <p class="status" id="status" hidden></p>
+    <section class="day on" data-day="1" data-date="2026-11-23">
+      <header class="d-head">
+        <p class="d-no">Day 1 · 11/23（一）· 抵達</p>
+        <h2 class="d-sum">紅眼抵成田 → 輕井澤 → 星野區泡湯散步</h2>
+        <p class="d-stay">宿：<b>APA 飯店〈輕井澤站前〉</b></p>
+      </header>
+      <ol class="its">
+        <li class="it" data-t="21:00" data-o="-1"><details><summary><span class="t">11/22 21:00</span><span class="b"><span class="k k-move">出發</span><span class="h">日豪客運 → 桃園機場</span><span class="w">新竹客運站上車</span></span><span class="cv" aria-hidden="true"></span></summary><p class="more">已預約。到第一航廈後直接去樂桃櫃台。</p></details></li>
+        <li class="it" data-t="23:30" data-o="-1"><details><summary><span class="t">11/22 深夜</span><span class="b"><span class="k k-move">報到</span><span class="h">樂桃報到、託運行李</span><span class="w">桃園第一航廈</span></span><span class="cv" aria-hidden="true"></span></summary><p class="more">報到 01:35 截止（起飛前 50 分），02:25 起飛。</p></details><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%A1%83%E5%9C%92%E5%9C%8B%E9%9A%9B%E6%A9%9F%E5%A0%B4+%E7%AC%AC%E4%B8%80%E8%88%AA%E5%BB%88" target="_blank" rel="noopener" aria-label="導航到 桃園機場第一航廈"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="06:30"><details><summary><span class="t">06:30</span><span class="b"><span class="k k-move">入境</span><span class="h">成田落地、入境、領行李</span><span class="w">第一航廈</span></span><span class="cv" aria-hidden="true"></span></summary><p class="more">開通日本網卡。</p></details><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%88%90%E7%94%B0%E7%A9%BA%E6%B8%AF+%E7%AC%AC1%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB" target="_blank" rel="noopener" aria-label="導航到 成田空港 第1ターミナル"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="07:40"><details><summary><span class="t">~07:40</span><span class="b"><span class="k k-move">換票</span><span class="h">換 Skyliner 去程、領兩張新幹線</span><span class="w">成田 B1</span></span><span class="cv" aria-hidden="true"></span></summary><p class="more">京成和 JR 車站在同一層。這裡換 4 趟裡的 3 趟，Skyliner 回程 11/27 才能換。同一趟的票一起插閘門。</p></details></li>
+        <li class="it" data-t="07:50"><div class="row"><span class="t">~07:50</span><span class="b"><span class="k k-eat">早餐</span><span class="h">超商或便當</span><span class="w">成田 B1／上野站</span></span></div></li>
+        <li class="it" data-t="08:12"><details><summary><span class="t">~08:12</span><span class="b"><span class="k k-move">Skyliner</span><span class="h">成田空港 → 京成上野</span><span class="w">約 44 分</span></span><span class="cv" aria-hidden="true"></span></summary><p class="more">08:30 前發車的任一班都趕得上新幹線。</p></details><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BA%AC%E6%88%90%E4%B8%8A%E9%87%8E%E9%A7%85" target="_blank" rel="noopener" aria-label="導航到 京成上野駅"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="09:00"><div class="row"><span class="t">~09:00</span><span class="b"><span class="k k-move">轉乘</span><span class="h">走到 JR 上野站</span><span class="w">8–10 分</span></span></div><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=JR+%E4%B8%8A%E9%87%8E%E9%A7%85" target="_blank" rel="noopener" aria-label="導航到 JR 上野駅"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="09:38"><div class="row"><span class="t">09:38</span><span class="b"><span class="k k-move">新幹線</span><span class="h">はくたか 557 上野 → 輕井澤</span><span class="w">10:32 到</span></span></div><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=JR+%E8%BB%BD%E4%BA%95%E6%B2%A2%E9%A7%85" target="_blank" rel="noopener" aria-label="導航到 JR 軽井沢駅"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="10:40"><details><summary><span class="t">~10:40</span><span class="b"><span class="k k-stay">寄行李</span><span class="h">APA 輕井澤站前</span><span class="w">北口走 1 分</span></span><span class="cv" aria-hidden="true"></span></summary><p class="more">Check-in 15:00。</p></details><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%A2%E3%83%91%E3%83%9B%E3%83%86%E3%83%AB+%E8%BB%BD%E4%BA%95%E6%B2%A2%E9%A7%85%E5%89%8D" target="_blank" rel="noopener" aria-label="導航到 アパホテル〈軽井沢駅前〉"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="11:00"><details><summary><span class="t">~11:00</span><span class="b"><span class="k k-move">巴士</span><span class="h">西武巴士 → 星野温泉トンボの湯</span><span class="w">北口上車</span></span><span class="cv" aria-hidden="true"></span></summary><p class="more">約 17 分、¥470。上車前看目的地牌，不是每班都到。</p></details><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%BB%BD%E4%BA%95%E6%B2%A2%E9%A7%85+%E5%8C%97%E5%8F%A3+%E3%83%90%E3%82%B9%E4%B9%97%E3%82%8A%E5%A0%B4" target="_blank" rel="noopener" aria-label="導航到 軽井沢駅 北口バス乗り場"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="11:20"><div class="row"><span class="t">~11:20</span><span class="b"><span class="k k-eat">午餐</span><span class="h">川上庵 蕎麥麵</span><span class="w">榆樹街小鎮</span></span></div><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E5%B7%9D%E4%B8%8A%E5%BA%B5+%E3%83%8F%E3%83%AB%E3%83%8B%E3%83%AC%E3%83%86%E3%83%A9%E3%82%B9" target="_blank" rel="noopener" aria-label="導航到 川上庵 ハルニレテラス店"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="12:30"><details><summary><span class="t">~12:30</span><span class="b"><span class="k k-see">泡湯</span><span class="h">星野溫泉 蜻蜓之湯</span></span><span class="cv" aria-hidden="true"></span></summary><p class="more">10:00–22:00，大人 ¥1,550，毛巾可租。</p></details><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%98%9F%E9%87%8E%E6%B8%A9%E6%B3%89+%E3%83%88%E3%83%B3%E3%83%9C%E3%81%AE%E6%B9%AF" target="_blank" rel="noopener" aria-label="導航到 星野温泉 トンボの湯"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="14:00"><div class="row"><span class="t">14:00 多</span><span class="b"><span class="k k-see">散步</span><span class="h">榆樹街小鎮</span></span></div><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%83%8F%E3%83%AB%E3%83%8B%E3%83%AC%E3%83%86%E3%83%A9%E3%82%B9+%E8%BB%BD%E4%BA%95%E6%B2%A2" target="_blank" rel="noopener" aria-label="導航到 ハルニレテラス"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="15:00"><div class="row"><span class="t">~15:00</span><span class="b"><span class="k k-eat">咖啡</span><span class="h">丸山珈琲</span><span class="w">坐到 16:00</span></span></div><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%B8%B8%E5%B1%B1%E7%8F%88%E7%90%B2+%E3%83%8F%E3%83%AB%E3%83%8B%E3%83%AC%E3%83%86%E3%83%A9%E3%82%B9%E5%BA%97" target="_blank" rel="noopener" aria-label="導航到 丸山珈琲 ハルニレテラス店"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="16:10"><div class="row"><span class="t">16:00 後</span><span class="b"><span class="k k-move">回 APA</span><span class="h">巴士回輕井澤站、Check-in</span></span></div><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%A2%E3%83%91%E3%83%9B%E3%83%86%E3%83%AB+%E8%BB%BD%E4%BA%95%E6%B2%A2%E9%A7%85%E5%89%8D" target="_blank" rel="noopener" aria-label="導航到 アパホテル〈軽井沢駅前〉"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="19:00"><div class="row"><span class="t">晚上</span><span class="b"><span class="k k-eat">晚餐</span><span class="h">明治亭 醬汁豬排丼</span><span class="w">Outlet 味の街</span></span></div><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%98%8E%E6%B2%BB%E4%BA%AD+%E8%BB%BD%E4%BA%95%E6%B2%A2%E3%83%97%E3%83%AA%E3%83%B3%E3%82%B9%E3%82%B7%E3%83%A7%E3%83%83%E3%83%94%E3%83%B3%E3%82%B0%E3%83%97%E3%83%A9%E3%82%B6" target="_blank" rel="noopener" aria-label="導航到 明治亭 軽井沢店"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+      </ol>
+    </section>
+    <section class="day" data-day="2" data-date="2026-11-24">
+      <header class="d-head">
+        <p class="d-no">Day 2 · 11/24（二）· 王子東館</p>
+        <h2 class="d-sum">搬到雪場旁 · 單板教練課 · Outlet</h2>
+        <p class="d-stay">宿：<b>輕井澤王子大飯店 東館</b></p>
+      </header>
+      <ol class="its">
+        <li class="it" data-t="07:30"><div class="row"><span class="t">07:30</span><span class="b"><span class="k k-eat">早餐</span><span class="h">APA 本館餐廳「四季」</span><span class="w">含早，到 09:30</span></span></div></li>
+        <li class="it" data-t="08:30"><details><summary><span class="t">08:30</span><span class="b"><span class="k k-move">退房</span><span class="h">APA 退房 → 王子東館</span><span class="w">接駁車或步行 18 分</span></span><span class="cv" aria-hidden="true"></span></summary><p class="more">南口免費接駁 08:00 起，約 30 分一班。</p></details><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%BB%BD%E4%BA%95%E6%B2%A2%E3%83%97%E3%83%AA%E3%83%B3%E3%82%B9%E3%83%9B%E3%83%86%E3%83%AB%E3%82%A4%E3%83%BC%E3%82%B9%E3%83%88" target="_blank" rel="noopener" aria-label="導航到 軽井沢プリンスホテル イースト"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="09:00"><details><summary><span class="t">~09:00</span><span class="b"><span class="k k-stay">寄行李</span><span class="h">東館櫃台寄行李、換纜車票</span></span><span class="cv" aria-hidden="true"></span></summary><p class="more">掃當天的纜車票 QR，在住客專用兌換機換票。</p></details></li>
+        <li class="it" data-t="09:15"><details><summary><span class="t">~09:15</span><span class="b"><span class="k k-ski">租裝備</span><span class="h">East Rental Ski 領單板和雪鞋</span><span class="w">東館 1F</span></span><span class="cv" aria-hidden="true"></span></summary><p class="more">出示預約確認信。住客租借櫃台 8:00–17:00。</p></details></li>
+        <li class="it" data-t="09:35"><details><summary><span class="t">~09:35</span><span class="b"><span class="k k-move">移動</span><span class="h">走到スキーセンター</span><span class="w">10–15 分</span></span><span class="cv" aria-hidden="true"></span></summary><p class="more">跟東館的租借櫃台是不同棟。</p></details><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%BB%BD%E4%BA%95%E6%B2%A2%E3%83%97%E3%83%AA%E3%83%B3%E3%82%B9%E3%83%9B%E3%83%86%E3%83%AB%E3%82%B9%E3%82%AD%E3%83%BC%E5%A0%B4+%E3%82%B9%E3%82%AD%E3%83%BC%E3%82%BB%E3%83%B3%E3%82%BF%E3%83%BC" target="_blank" rel="noopener" aria-label="導航到 スキーセンター"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="10:00"><details><summary><span class="t">10:00–13:00</span><span class="b"><span class="k k-ski">教練課</span><span class="h">中文單板教練課</span><span class="w">スキーセンター集合</span></span><span class="cv" aria-hidden="true"></span></summary><p class="more">一對一 3 小時。費用不含纜車票與雪具。</p></details></li>
+        <li class="it" data-t="13:00"><div class="row"><span class="t">13:00</span><span class="b"><span class="k k-eat">午餐</span><span class="h">雪場簡單吃</span></span></div></li>
+        <li class="it" data-t="13:45"><div class="row"><span class="t">~13:45</span><span class="b"><span class="k k-ski">練習</span><span class="h">自主練習</span><span class="w">纜車到 16:30</span></span></div></li>
+        <li class="it" data-t="15:30"><div class="row"><span class="t">15:30 後</span><span class="b"><span class="k k-stay">Check-in</span><span class="h">東館入住、領行李</span></span></div></li>
+        <li class="it" data-t="16:45"><div class="row"><span class="t">~16:45</span><span class="b"><span class="k k-see">逛街</span><span class="h">Outlet 逛冬裝</span><span class="w">走 15 分，店家到 19:00</span></span></div><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%BB%BD%E4%BA%95%E6%B2%A2%E3%83%BB%E3%83%97%E3%83%AA%E3%83%B3%E3%82%B9%E3%82%B7%E3%83%A7%E3%83%83%E3%83%94%E3%83%B3%E3%82%B0%E3%83%97%E3%83%A9%E3%82%B6" target="_blank" rel="noopener" aria-label="導航到 軽井沢・プリンスショッピングプラザ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="19:00"><div class="row"><span class="t">~19:00</span><span class="b"><span class="k k-eat">晚餐</span><span class="h">烤肉店</span><span class="w">Outlet 味の街</span></span></div><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%BB%BD%E4%BA%95%E6%B2%A2%E3%83%97%E3%83%AA%E3%83%B3%E3%82%B9%E3%82%B7%E3%83%A7%E3%83%83%E3%83%94%E3%83%B3%E3%82%B0%E3%83%97%E3%83%A9%E3%82%B6+%E5%91%B3%E3%81%AE%E8%A1%97" target="_blank" rel="noopener" aria-label="導航到 プリンスショッピングプラザ 味の街"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="20:30"><details><summary><span class="t">之後</span><span class="b"><span class="k k-see">泡湯</span><span class="h">Forest Hot Spring</span><span class="w">東館，到 23:00</span></span><span class="cv" aria-hidden="true"></span></summary><p class="more">住客付入湯稅 ¥150，最後入場 22:30。</p></details></li>
+      </ol>
+    </section>
+    <section class="day" data-day="3" data-date="2026-11-25">
+      <header class="d-head">
+        <p class="d-no">Day 3 · 11/25（三）· 王子東館</p>
+        <h2 class="d-sum">滑雪第 2 天 · Outlet · 明治亭</h2>
+        <p class="d-stay">宿：<b>輕井澤王子大飯店 東館</b></p>
+      </header>
+      <ol class="its">
+        <li class="it" data-t="07:00"><details><summary><span class="t">07:00</span><span class="b"><span class="k k-eat">早餐</span><span class="h">Karuizawa Grill</span><span class="w">東館 1F，已預約</span></span><span class="cv" aria-hidden="true"></span></summary><p class="more">報姓名，出示早餐券或房卡。遲到 15 分鐘位子可能被取消。</p></details></li>
+        <li class="it" data-t="09:00"><div class="row"><span class="t">09:00</span><span class="b"><span class="k k-ski">滑雪</span><span class="h">換當天纜車票，上雪場</span><span class="w">東館兌換機</span></span></div></li>
+        <li class="it" data-t="12:30"><div class="row"><span class="t">12:30</span><span class="b"><span class="k k-eat">午餐</span><span class="h">雪場</span></span></div></li>
+        <li class="it" data-t="13:30"><div class="row"><span class="t">13:30</span><span class="b"><span class="k k-ski">滑雪</span><span class="h">下午續滑</span><span class="w">15:30–16:00 收板</span></span></div></li>
+        <li class="it" data-t="16:00"><div class="row"><span class="t">~16:00</span><span class="b"><span class="k k-stay">回房</span><span class="h">沖澡、換衣服</span></span></div></li>
+        <li class="it" data-t="16:45"><div class="row"><span class="t">~16:45</span><span class="b"><span class="k k-see">逛街</span><span class="h">Outlet</span><span class="w">走 15 分</span></span></div><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%BB%BD%E4%BA%95%E6%B2%A2%E3%83%BB%E3%83%97%E3%83%AA%E3%83%B3%E3%82%B9%E3%82%B7%E3%83%A7%E3%83%83%E3%83%94%E3%83%B3%E3%82%B0%E3%83%97%E3%83%A9%E3%82%B6" target="_blank" rel="noopener" aria-label="導航到 軽井沢・プリンスショッピングプラザ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="19:00"><div class="row"><span class="t">~19:00</span><span class="b"><span class="k k-eat">晚餐</span><span class="h">明治亭</span><span class="w">Outlet 味の街</span></span></div><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%98%8E%E6%B2%BB%E4%BA%AD+%E8%BB%BD%E4%BA%95%E6%B2%A2%E3%83%97%E3%83%AA%E3%83%B3%E3%82%B9%E3%82%B7%E3%83%A7%E3%83%83%E3%83%94%E3%83%B3%E3%82%B0%E3%83%97%E3%83%A9%E3%82%B6" target="_blank" rel="noopener" aria-label="導航到 明治亭 軽井沢店"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+      </ol>
+    </section>
+    <section class="day" data-day="4" data-date="2026-11-26">
+      <header class="d-head">
+        <p class="d-no">Day 4 · 11/26（四）· 移到上野</p>
+        <h2 class="d-sum">最後一滑 · 新幹線到上野 · 秋葉原</h2>
+        <p class="d-stay">宿：<b>APA 飯店〈京成上野站前南〉</b></p>
+      </header>
+      <ol class="its">
+        <li class="it" data-t="07:00"><div class="row"><span class="t">07:00</span><span class="b"><span class="k k-eat">早餐</span><span class="h">Karuizawa Grill</span><span class="w">東館 1F，已預約</span></span></div></li>
+        <li class="it" data-t="09:30"><div class="row"><span class="t">~09:30</span><span class="b"><span class="k k-stay">退房</span><span class="h">東館退房、行李寄櫃台</span></span></div></li>
+        <li class="it" data-t="10:00"><div class="row"><span class="t">10:00</span><span class="b"><span class="k k-ski">滑雪</span><span class="h">最後一滑</span><span class="w">13:00 收板</span></span></div></li>
+        <li class="it" data-t="13:00"><div class="row"><span class="t">13:00</span><span class="b"><span class="k k-ski">還裝備</span><span class="h">還板和雪鞋、取行李、換衣</span><span class="w">東館 1F</span></span></div></li>
+        <li class="it" data-t="13:40"><div class="row"><span class="t">~13:40</span><span class="b"><span class="k k-eat">午餐</span><span class="h">簡單吃</span></span></div></li>
+        <li class="it" data-t="14:15"><div class="row"><span class="t">14:15</span><span class="b"><span class="k k-move">接駁車</span><span class="h">東館 → 輕井澤站南口</span></span></div><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=JR+%E8%BB%BD%E4%BA%95%E6%B2%A2%E9%A7%85" target="_blank" rel="noopener" aria-label="導航到 JR 軽井沢駅"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="15:00"><details><summary><span class="t">15:00</span><span class="b"><span class="k k-move">新幹線</span><span class="h">あさま 620 輕井澤 → 上野</span><span class="w">約 16:06 到</span></span><span class="cv" aria-hidden="true"></span></summary><p class="more">原訂はくたか 568，改搭這班。</p></details><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=JR+%E4%B8%8A%E9%87%8E%E9%A7%85" target="_blank" rel="noopener" aria-label="導航到 JR 上野駅"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="16:20"><div class="row"><span class="t">~16:20</span><span class="b"><span class="k k-stay">Check-in</span><span class="h">APA 京成上野站前南</span><span class="w">上野站走 10 分</span></span></div><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%A2%E3%83%91%E3%83%9B%E3%83%86%E3%83%AB+%E4%BA%AC%E6%88%90%E4%B8%8A%E9%87%8E%E9%A7%85%E5%89%8D%E5%8D%97+%E5%8F%B0%E6%9D%B1%E5%8C%BA%E4%B8%8A%E9%87%8E2-6-11" target="_blank" rel="noopener" aria-label="導航到 アパホテル〈京成上野駅前南〉"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="17:00"><div class="row"><span class="t">17:00</span><span class="b"><span class="k k-see">藥妝</span><span class="h">飯店樓下的藥妝店</span></span></div></li>
+        <li class="it" data-t="17:45"><div class="row"><span class="t">之後</span><span class="b"><span class="k k-see">逛街</span><span class="h">秋葉原</span></span></div><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=JR+%E7%A7%8B%E8%91%89%E5%8E%9F%E9%A7%85" target="_blank" rel="noopener" aria-label="導航到 JR 秋葉原駅"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="19:10"><details><summary><span class="t">19:00 多</span><span class="b"><span class="k k-eat">晚餐</span><span class="h">Aarti 印度咖哩</span><span class="w">秋葉原</span></span><span class="cv" aria-hidden="true"></span></summary><p class="more">大岩ビル 2F，入口要走樓梯上去。只收現金。</p></details><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%A4%E3%83%B3%E3%83%87%E3%82%A3%E3%82%A2%E3%83%B3%E3%83%AC%E3%82%B9%E3%83%88%E3%83%A9%E3%83%B3+%E3%82%A2%E3%83%BC%E3%83%AB%E3%83%86%E3%82%A3+%E5%8D%83%E4%BB%A3%E7%94%B0%E5%8C%BA%E7%A5%9E%E7%94%B0%E4%BD%90%E4%B9%85%E9%96%93%E6%B2%B3%E5%B2%B850" target="_blank" rel="noopener" aria-label="導航到 インディアンレストラン アールティ"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="21:00"><div class="row"><span class="t">晚上</span><span class="b"><span class="k k-stay">回 APA</span><span class="h">泡大浴場</span></span></div><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%A2%E3%83%91%E3%83%9B%E3%83%86%E3%83%AB+%E4%BA%AC%E6%88%90%E4%B8%8A%E9%87%8E%E9%A7%85%E5%89%8D%E5%8D%97+%E5%8F%B0%E6%9D%B1%E5%8C%BA%E4%B8%8A%E9%87%8E2-6-11" target="_blank" rel="noopener" aria-label="導航到 アパホテル〈京成上野駅前南〉"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="22:30"><div class="row"><span class="t">22:30–23:30</span><span class="b"><span class="k k-eat">宵夜</span><span class="h">一蘭拉麵</span></span></div></li>
+      </ol>
+    </section>
+    <section class="day" data-day="5" data-date="2026-11-27">
+      <header class="d-head">
+        <p class="d-no">Day 5 · 11/27（五）· 返程</p>
+        <h2 class="d-sum">Skyliner 到成田 · 返桃園</h2>
+        
+      </header>
+      <ol class="its">
+        <li class="it" data-t="07:30"><div class="row"><span class="t">07:30</span><span class="b"><span class="k k-eat">早餐</span><span class="h">APA 1F 餐廳</span><span class="w">到 10:00</span></span></div></li>
+        <li class="it" data-t="08:50"><div class="row"><span class="t">~08:50</span><span class="b"><span class="k k-stay">退房</span><span class="h">走到京成上野站</span><span class="w">5 分</span></span></div><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E4%BA%AC%E6%88%90%E4%B8%8A%E9%87%8E%E9%A7%85" target="_blank" rel="noopener" aria-label="導航到 京成上野駅"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="09:00"><details><summary><span class="t">~09:00</span><span class="b"><span class="k k-move">換票</span><span class="h">Skyliner 回程劃位</span><span class="w">京成上野站</span></span><span class="cv" aria-hidden="true"></span></summary><p class="more">回程只能當天換票、當天劃位。</p></details></li>
+        <li class="it" data-t="09:15"><details><summary><span class="t">~09:15</span><span class="b"><span class="k k-move">Skyliner</span><span class="h">京成上野 → 成田第一航廈</span><span class="w">約 45 分</span></span><span class="cv" aria-hidden="true"></span></summary><p class="more">先停第二航廈，坐到終點。</p></details><a class="go" href="https://www.google.com/maps/search/?api=1&amp;query=%E6%88%90%E7%94%B0%E7%A9%BA%E6%B8%AF+%E7%AC%AC1%E3%82%BF%E3%83%BC%E3%83%9F%E3%83%8A%E3%83%AB" target="_blank" rel="noopener" aria-label="導航到 成田空港 第1ターミナル"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg></a></li>
+        <li class="it" data-t="10:05"><details><summary><span class="t">~10:05</span><span class="b"><span class="k k-move">報到</span><span class="h">樂桃報到、託運行李</span><span class="w">第一航廈北翼</span></span><span class="cv" aria-hidden="true"></span></summary><p class="more">報到 12:05 截止。有退稅商品要在託運前做海關確認。</p></details></li>
+        <li class="it" data-t="12:55"><div class="row"><span class="t">12:55</span><span class="b"><span class="k k-move">起飛</span><span class="h">MM621 成田 → 桃園</span><span class="w">28A 登機門，巴士登機</span></span></div></li>
+        <li class="it" data-t="16:15"><div class="row"><span class="t">16:15</span><span class="b"><span class="k k-move">抵達</span><span class="h">桃園第一航廈</span></span></div></li>
+      </ol>
+    </section>
+    <div class="pn"><button id="prev">← 前一天</button><button id="next">後一天 →</button></div>
+    </div>
+  </div>
+
+  <!-- ===== 訂位與票券：所有預約集中在這裡，編號只存在手機 ===== -->
+  <div class="view" id="v-book">
+    <div class="wrap">
+    <h2 class="sec">航班</h2>
+    <div class="card">
+      <div class="bk-h"><h3>樂桃 MM620・MM621</h3><span class="st">✅ 已開票</span></div>
+      <p class="bk-l">去程 11/23（一）桃園 T1 02:25 → 成田 T1 06:30</p>
+      <p class="bk-l">回程 11/27（五）成田 T1 12:55 → 桃園 T1 16:15</p>
+      <div data-private="peach-pnr" data-label="樂桃訂位代號"></div>
+    </div>
+
+    <h2 class="sec">車票</h2>
+    <div class="card">
+      <div class="bk-h"><h3>日豪客運 → 桃園機場</h3><span class="st">✅ 已預約</span></div>
+      <p class="bk-l">11/22（日）21:00 新竹客運站上車</p>
+      <div data-private="bus-rihao" data-label="日豪客運預約資訊" data-placeholder="預約編號、車次"></div>
+    </div>
+    <div class="card">
+      <div class="bk-h"><h3>Skyliner 來回</h3><span class="st">✅ Klook</span></div>
+      <p class="bk-l">去程 11/23：成田 T1 B1 換票</p>
+      <p class="bk-l">回程 11/27：京成上野站當天換票、劃位</p>
+      <div data-private="klook-skyliner" data-label="Klook 訂單編號（Skyliner）"></div>
+    </div>
+    <div class="card">
+      <div class="bk-h"><h3>新幹線 上野 ⇄ 輕井澤</h3><span class="st">✅ Klook</span></div>
+      <p class="bk-l">11/23 はくたか 557　上野 09:38 → 輕井澤 10:32</p>
+      <p class="bk-l">11/26 あさま 620　輕井澤 15:00 → 上野 約 16:06（已改票）</p>
+      <p class="bk-l">11/23 在成田 T1 B1 的 JR 售票機一次領兩張</p>
+      <div data-private="klook-shinkansen" data-label="Klook 訂單編號（新幹線）"></div>
+    </div>
+
+    <h2 class="sec">住宿</h2>
+    <div class="card">
+      <div class="bk-h"><h3>APA 飯店〈輕井澤站前〉</h3><span class="st">✅ Agoda</span></div>
+      <p class="bk-l">11/23 入住 15:00 → 11/24 退房 10:00 · 含早餐（四季 07:00–09:30）</p>
+      <p class="bk-go"><a class="go go-txt" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%A2%E3%83%91%E3%83%9B%E3%83%86%E3%83%AB+%E8%BB%BD%E4%BA%95%E6%B2%A2%E9%A7%85%E5%89%8D" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg><span>導航</span></a></p>
+      <div data-private="lodge-apa-karuizawa" data-label="Agoda 訂單編號"></div>
+    </div>
+    <div class="card">
+      <div class="bk-h"><h3>輕井澤王子大飯店 東館</h3><span class="st">✅ Agoda</span></div>
+      <p class="bk-l">11/24 入住 15:00 → 11/26 退房 12:00 · 含早餐（要先預約）</p>
+      <p class="bk-l">入住前、退房後都可以寄放行李</p>
+      <p class="bk-go"><a class="go go-txt" href="https://www.google.com/maps/search/?api=1&amp;query=%E8%BB%BD%E4%BA%95%E6%B2%A2%E3%83%97%E3%83%AA%E3%83%B3%E3%82%B9%E3%83%9B%E3%83%86%E3%83%AB%E3%82%A4%E3%83%BC%E3%82%B9%E3%83%88" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg><span>導航</span></a></p>
+      <div data-private="lodge-prince-east" data-label="Agoda 訂單編號"></div>
+    </div>
+    <div class="card">
+      <div class="bk-h"><h3>APA 飯店〈京成上野站前南〉</h3><span class="st">✅ Agoda</span></div>
+      <p class="bk-l">11/26 入住 15:00 → 11/27 退房 10:00 · 含早餐（1F 07:00–10:00）</p>
+      <p class="bk-go"><a class="go go-txt" href="https://www.google.com/maps/search/?api=1&amp;query=%E3%82%A2%E3%83%91%E3%83%9B%E3%83%86%E3%83%AB+%E4%BA%AC%E6%88%90%E4%B8%8A%E9%87%8E%E9%A7%85%E5%89%8D%E5%8D%97+%E5%8F%B0%E6%9D%B1%E5%8C%BA%E4%B8%8A%E9%87%8E2-6-11" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 3.5 3.8 10.4l6.6 2.5 2.5 6.6z"/></svg><span>導航</span></a></p>
+      <div data-private="lodge-apa-ueno" data-label="Agoda 訂單編號"></div>
+    </div>
+
+    <h2 class="sec">滑雪</h2>
+    <div class="card">
+      <div class="bk-h"><h3>纜車票（住客價）</h3><span class="st">✅ 三張</span></div>
+      <p class="bk-l">11/24・11/25・11/26 各一張，當天在東館住客兌換機掃 QR 換票</p>
+    </div>
+    <div class="card">
+      <div class="bk-h"><h3>雪具：單板＋雪鞋</h3><span class="st">✅ 已預約</span></div>
+      <p class="bk-l">11/24–11/26，東館 1F East Rental Ski 領取和歸還（8:00–17:00）</p>
+      <div data-private="rental-east" data-label="East Rental Ski 預約編號"></div>
+    </div>
+    <div class="card">
+      <div class="bk-h"><h3>中文單板教練課</h3><span class="st">✅ Klook</span></div>
+      <p class="bk-l">11/24 10:00–13:00，スキーセンター集合。不含纜車票與雪具</p>
+      <div data-private="klook-lesson" data-label="Klook 訂單編號（教練課）"></div>
+    </div>
+
+    <h2 class="sec">餐廳</h2>
+    <div class="card">
+      <div class="bk-h"><h3>東館早餐 Karuizawa Grill</h3><span class="st">✅ TableCheck</span></div>
+      <p class="bk-l">11/25、11/26 都是 07:00。報姓名，出示早餐券或房卡</p>
+      <div data-private="tc-breakfast-1125" data-label="TableCheck 預約編號（11/25 早餐）"></div>
+      <div data-private="tc-breakfast-1126" data-label="TableCheck 預約編號（11/26 早餐）"></div>
+    </div>
+    <div class="card">
+      <div class="bk-h"><h3>Primrose 自助餐</h3><span class="st off">已取消</span></div>
+      <p class="bk-l">11/25 17:30 的預約已取消</p>
+    </div>
+    </div>
+  </div>
+
+  <!-- ===== 清單：行李、採買、待辦 ===== -->
+  <div class="view" id="v-list">
+    <div class="wrap">
+    <h2 class="sec">出發前</h2>
+    <div class="card">
+      <h3 class="list-h">自備物品</h3>
+      <ul class="kit-list">
+        <li data-todo="pack-wear">雪衣雪褲</li>
+        <li data-todo="pack-gloves">手套</li>
+        <li data-todo="pack-beanie">安全帽</li>
+        <li data-todo="pack-goggles">護目鏡</li>
+        <li data-todo="pack-pads">防摔褲</li>
+        <li data-todo="pack-socks">厚襪</li>
+        <li data-todo="pack-warmers">暖暖包</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 class="list-h">QR 截圖存手機</h3>
+      <ul class="kit-list">
+        <li data-todo="qr-klook">Klook 三張（Skyliner 來回、新幹線）</li>
+        <li data-todo="qr-lift">纜車票三張</li>
+        <li data-todo="qr-rental">雪具預約確認信</li>
+        <li data-todo="qr-vjw">Visit Japan Web</li>
+      </ul>
+    </div>
+
+    <h2 class="sec">旅途中</h2>
+    <div class="card">
+      <h3 class="list-h">換票</h3>
+      <ul class="kit-list">
+        <li data-todo="swap-skyliner-out">11/23 成田 T1 B1：換 Skyliner 去程</li>
+        <li data-todo="swap-shinkansen">11/23 同一層 JR 售票機：領兩張新幹線</li>
+        <li data-todo="swap-skyliner-back">11/27 京成上野：換 Skyliner 回程</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 class="list-h">到現場要做</h3>
+      <ul class="kit-list">
+        <li data-todo="ask-apa-luggage">Day 1 到 APA 輕井澤先寄行李</li>
+        <li data-todo="ask-east-checkin">東館 Check-in：告知早餐已預約 07:00、問能否掛房帳</li>
+        <li data-todo="ask-harunire-lights" data-done>榆樹街小鎮聖誕點燈：11/21–12/25，16:00–22:00</li>
+        <li data-todo="cancel-primrose" data-done>取消 Primrose 11/25 17:30 的預約</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h3 class="list-h">採買</h3>
+      <ul class="kit-list">
+        <li data-todo="shop-eve">EVE 止痛藥</li>
+        <li data-todo="shop-sesamin">芝麻明（EX 優先，沒有就買セサミン E）</li>
+        <li data-todo="shop-cleandental">牙膏 クリーンデンタル 美白ケア（粉紅色那條）</li>
+        <li data-todo="shop-omiyage">伴手禮</li>
+      </ul>
+    </div>
+
+    <h2 class="sec">這支手機</h2>
+    <div class="card">
+      <div data-private="notes" data-label="私人備註" data-multiline data-placeholder="保單號碼、緊急聯絡電話、信用卡掛失專線…"></div>
+    </div>
+    <div data-kit-panel style="margin-top:10px"></div>
+    <p class="foot">新格式試作 · 內容是 2026.11.23–11.27 的實際行程</p>
+    </div>
+  </div>
+</main>
+
+<script>
+(function () {
+  'use strict';
+  var $ = function (s, r) { return (r || document).querySelector(s); };
+  var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var days = $$('.day'), chips = $$('.chip'), tabs = $$('.tab');
+  var cur = 1, tab = 'plan';
+
+  /* 現在（日本時間）。網址加 ?now=2026-11-25T14:00 可以預覽旅途中的樣子 */
+  var sim = (new URLSearchParams(location.search).get('now') || '').match(/^\d{4}-\d\d-\d\dT\d\d:\d\d$/);
+  function nowKey() {
+    if (sim) return sim[0];
+    var p = {};
+    new Intl.DateTimeFormat('en-CA', { timeZone: 'Asia/Tokyo', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', hourCycle: 'h23' })
+      .formatToParts(new Date()).forEach(function (x) { p[x.type] = x.value; });
+    return p.year + '-' + p.month + '-' + p.day + 'T' + p.hour + ':' + p.minute;
+  }
+  function shift(date, n) {
+    var d = new Date(date + 'T00:00:00Z'); d.setUTCDate(d.getUTCDate() + n); return d.toISOString().slice(0, 10);
+  }
+  function itemKey(it) {
+    var date = it.closest('.day').getAttribute('data-date');
+    return shift(date, Number(it.getAttribute('data-o') || 0)) + 'T' + it.getAttribute('data-t');
+  }
+
+  function showDay(n, scroll) {
+    cur = Math.min(Math.max(n, 1), days.length);
+    days.forEach(function (d) { d.classList.toggle('on', Number(d.getAttribute('data-day')) === cur); });
+    chips.forEach(function (c) {
+      var on = Number(c.getAttribute('data-day')) === cur;
+      c.classList.toggle('on', on); c.setAttribute('aria-pressed', on ? 'true' : 'false');
+      if (on && c.scrollIntoView) c.scrollIntoView({ block: 'nearest', inline: 'center' });
+    });
+    $('#prev').disabled = cur === 1; $('#next').disabled = cur === days.length;
+    if (scroll) window.scrollTo(0, Math.min(window.scrollY, $('.mast').offsetHeight));
+    remember();
+  }
+  function showTab(name) {
+    tab = name;
+    tabs.forEach(function (t) { var on = t.getAttribute('data-tab') === name; t.classList.toggle('on', on); t.setAttribute('aria-pressed', on ? 'true' : 'false'); });
+    $$('.view').forEach(function (v) { v.classList.toggle('on', v.id === 'v-' + name); });
+    window.scrollTo(0, Math.min(window.scrollY, $('.mast').offsetHeight));
+    remember();
+  }
+  function remember() { try { history.replaceState(null, '', location.pathname + location.search + '#' + tab + (tab === 'plan' ? '-' + cur : '')); } catch (e) {} }
+
+  /* 依現在時間：選當天、把過去的項目變淡、標出下一項 */
+  function paintNow(first) {
+    var now = nowKey(), today = now.slice(0, 10), status = $('#status');
+    var all = $$('.it'), firstKey = itemKey(all[0]), lastDate = days[days.length - 1].getAttribute('data-date');
+    all.forEach(function (it) { it.classList.remove('past', 'next'); });
+    chips.forEach(function (c) { c.classList.remove('today'); });
+    var note = sim ? '（預覽）' : '';
+    if (today > lastDate) { status.innerHTML = '旅程已結束，以下是實際行程。'; status.hidden = false; return null; }
+    if (today < firstKey.slice(0, 10)) {
+      var left = Math.round((Date.parse(firstKey.slice(0, 10) + 'T00:00:00Z') - Date.parse(today + 'T00:00:00Z')) / 864e5);
+      status.innerHTML = '還有 <b>' + left + ' 天</b>出發。' + note; status.hidden = false; return 1;
+    }
+    var idx = -1;
+    for (var i = 0; i < all.length; i++) { if (itemKey(all[i]) <= now) idx = i; else break; }
+    var curIt = idx >= 0 ? all[idx] : null, nextIt = all[idx + 1] || null, dayEl = null;
+    days.forEach(function (d) { if (d.getAttribute('data-date') === today) dayEl = d; });
+    if (!dayEl) dayEl = (nextIt || curIt).closest('.day');
+    var n = Number(dayEl.getAttribute('data-day'));
+    /* 最近開始的那一項可能還在進行，不變淡；比它更早的才變淡 */
+    if (curIt) $$('.it', dayEl).forEach(function (it) { if (itemKey(it) < itemKey(curIt)) it.classList.add('past'); });
+    chips[n - 1].classList.add('today');
+    var head = '現在 <b>' + now.slice(11) + '</b>（日本時間）' + note + '　';
+    var target = (nextIt && nextIt.closest('.day') === dayEl) ? nextIt : null;
+    if (target) {
+      target.classList.add('next');
+      status.innerHTML = head + '接下來：<b>' + target.querySelector('.t').textContent + ' ' + target.querySelector('.h').textContent + '</b>';
+    } else { status.innerHTML = head + '今天的行程都結束了。'; }
+    status.hidden = false;
+    if (first && target) setTimeout(function () {
+      var y = target.getBoundingClientRect().top + window.scrollY - ($('.tabs').offsetHeight + $('.chips').offsetHeight + 130);
+      if (y > 0) window.scrollTo({ top: y, behavior: 'smooth' });
+    }, 60);
+    return n;
+  }
+
+  chips.forEach(function (c) { c.addEventListener('click', function () { showDay(Number(c.getAttribute('data-day')), true); }); });
+  tabs.forEach(function (t) { t.addEventListener('click', function () { showTab(t.getAttribute('data-tab')); }); });
+  $('#prev').addEventListener('click', function () { showDay(cur - 1, true); });
+  $('#next').addEventListener('click', function () { showDay(cur + 1, true); });
+
+  /* 開啟時：旅途中直接到當天；其他時候回到上次看的地方 */
+  var m = location.hash.match(/^#(plan|book|list)(?:-(\d))?$/);
+  var todayDay = paintNow(true);
+  var inTrip = !!$('.it.next') || !!$('.chip.today');
+  if (inTrip) { showDay(todayDay); if (m && m[1] !== 'plan') showTab(m[1]); }
+  else { showDay(m && m[2] ? Number(m[2]) : (todayDay || 1)); if (m) showTab(m[1]); }
+  setInterval(function () { paintNow(false); }, 60000);
+  document.addEventListener('visibilitychange', function () { if (!document.hidden) paintNow(false); });
+})();
+</script>
+<script src="../kit/trip-kit.js" data-slug="karuizawa-2026-11" defer></script>
+</body>
+</html>
